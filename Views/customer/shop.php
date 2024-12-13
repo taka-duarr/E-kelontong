@@ -33,6 +33,10 @@ $db_barang = $model->getAllBarang();
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 <!--
     
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
 -->
 </head>
 
@@ -47,6 +51,12 @@ $db_barang = $model->getAllBarang();
                     <i class="fa fa-phone mx-2"></i>
                     <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
                 </div>
+                <div>
+                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+                </div>
             </div>
         </div>
     </nav>
@@ -57,7 +67,7 @@ $db_barang = $model->getAllBarang();
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.php">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="board.php">
                 Zay
             </a>
 
@@ -69,7 +79,7 @@ $db_barang = $model->getAllBarang();
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">Home</a>
+                            <a class="nav-link" href="board.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="about.php">About</a>
@@ -135,7 +145,7 @@ $db_barang = $model->getAllBarang();
                 <?php foreach ($db_barang as $item) { ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
-                            <img src="assets/img/<?php echo htmlspecialchars($item['gambar_barang']); ?>" class="w-full h-48 object-cover"  alt="<?php echo htmlspecialchars($item['nama_barang']); ?>">
+                            <img src="assets/img/<?php echo htmlspecialchars($item['gambar_barang']); ?>" class="w-full h-48 object-cover" alt="<?php echo htmlspecialchars($item['nama_barang']); ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($item['nama_barang']); ?></h5>
                                 <p class="card-text">Harga: Rp <?php echo number_format($item['harga_barang'], 0, ',', '.'); ?></p>
