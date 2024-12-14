@@ -1,36 +1,23 @@
-<?php
-// Menyertakan file model untuk mengambil data
-require_once '../../Model/ModelBarang.php';
-
-
-// Membuat instance dari kelas ModelBarang
-$model = new ModelBarang();
-
-// Mengambil status koneksi
-$connectionStatus = $model->connectDatabase();
-
-// Mengambil data barang
-$db_barang = $model->getAllBarang();
-?>
+<!-- <?php var_dump($Barangs); ?> -->
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Zay Shop - Product Listing Page</title>
+    <title>Zay Shop - Product List Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="Views/customer/assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="Views/customer/assets/img/favicon.ico">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="Views/customer/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Views/customer/assets/css/templatemo.css">
+    <link rel="stylesheet" href="Views/customer/assets/css/custom.css">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="Views/customer/assets/css/fontawesome.min.css">
 <!--
     
 TemplateMo 559 Zay Shop
@@ -141,11 +128,11 @@ https://templatemo.com/tm-559-zay-shop
     <!-- Start Content -->
     <div class="container mt-4">
         <div class="row">
-            <?php if (!empty($db_barang)) { ?>
-                <?php foreach ($db_barang as $item) { ?>
+            <?php if (!empty($Barangs)) { ?>
+                <?php foreach ($Barangs as $item) { ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
-                            <img src="assets/img/<?php echo htmlspecialchars($item['gambar_barang']); ?>" class="w-full h-48 object-cover" alt="<?php echo htmlspecialchars($item['nama_barang']); ?>">
+                            <img src="Views/customer/assets/img/<?php echo htmlspecialchars($item['gambar_barang']); ?>" class="w-full h-48 object-cover" alt="<?php echo htmlspecialchars($item['nama_barang']); ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($item['nama_barang']); ?></h5>
                                 <p class="card-text">Harga: Rp <?php echo number_format($item['harga_barang'], 0, ',', '.'); ?></p>
