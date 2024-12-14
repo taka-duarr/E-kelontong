@@ -22,7 +22,7 @@
     
 TemplateMo 559 Zay Shop
 
-https://templatemo.com/tm-559-zay-shop
+https://templatemo.com/tm-559-zay-Views/customer/shop
 
 -->
 </head>
@@ -54,7 +54,7 @@ https://templatemo.com/tm-559-zay-shop
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="board.php">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="Views/customer/board.php">
                 Zay
             </a>
 
@@ -66,16 +66,16 @@ https://templatemo.com/tm-559-zay-shop
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="board.php">Home</a>
+                            <a class="nav-link" href="Views/customer/board.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.php">About</a>
+                            <a class="nav-link" href="Views/customer/about.php">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.php">Shop</a>
+                            <a class="nav-link" href="index.php?modul=cust&fitur=shop">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.php">Contact</a>
+                            <a class="nav-link" href="Views/customer/contact.php">Contact</a>
                         </li>
                     </ul>
                 </div>

@@ -5,17 +5,18 @@
     <title>Zay Shop - About Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="http://tugas_akhir.test/" />
 
-    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="Views/customer/assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="Views/customer/assets/img/favicon.ico">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="Views/customer/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Views/customer/assets/css/templatemo.css">
+    <link rel="stylesheet" href="Views/customer/assets/css/custom.css">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="Views/customer/assets/css/fontawesome.min.css">
 <!--
     
 TemplateMo 559 Zay Shop
@@ -52,7 +53,7 @@ https://templatemo.com/tm-559-zay-shop
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="board.php">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="Views/customer/board.php">
                 Zay
             </a>
 
@@ -64,18 +65,18 @@ https://templatemo.com/tm-559-zay-shop
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="board.php">Home</a>
+                            <a class="nav-link" href="Views/customer/board.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.php">About</a>
+                            <a class="nav-link" href="Views/customer/about.php">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.php">Shop</a>
+                            <a class="nav-link" href="index.php?modul=cust&fitur=shop">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.php">Contact</a>
+                            <a class="nav-link" href="Views/customer/contact.php">Contact</a>
                         </li>
-                    </ul>
+                    </ul>   
                 </div>
                 <div class="navbar align-self-center d-flex">
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
@@ -135,7 +136,7 @@ https://templatemo.com/tm-559-zay-shop
                     </p>
                 </div>
                 <div class="col-md-4">
-                    <img src="assets/img/about-hero.svg" alt="About Hero">
+                    <img src="Views/customer/assets/img/about-hero.svg" alt="About Hero">
                 </div>
             </div>
         </div>
