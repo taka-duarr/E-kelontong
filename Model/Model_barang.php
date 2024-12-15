@@ -39,10 +39,10 @@ class ModelBarang {
         return $barang; // Kembalikan hasil berupa array
     }
 
-    public function createBarang($nama_barang,$stok_barang, $harga_barang, $gambar_barang) {
+    public function createBarang($nama_barang,$stok_barang, $harga_barang, $gambar_barang, $status_barang) {
         $query = "INSERT INTO db_barang (nama_barang,stok_barang, harga_barang, gambar_barang) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ssss" , $nama_barang, $stok_barang,$harga_barang, $gambar_barang);
+        $stmt->bind_param("ssss" , $nama_barang, $stok_barang,$harga_barang, $gambar_barang, $status_barang);
         
         if ($stmt->execute()) {
             return true;

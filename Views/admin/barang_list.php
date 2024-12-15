@@ -35,6 +35,7 @@
                             <th class="w-1/4 py-3 px-4 uppercase font-semibold text-sm">Nama Barang</th>
                             <th class="w-1/4 py-3 px-4 uppercase font-semibold text-sm">Jumlah Stok</th>
                             <th class="w-1/4 py-3 px-4 uppercase font-semibold text-sm">Harga Barang</th>
+                            <th class="w-1/4 py-3 px-4 uppercase font-semibold text-sm">status barang</th>
                             <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Actions</th>
                         </tr>
                     </thead>
@@ -47,6 +48,7 @@
                                     <td class="py-3 px-4"><?php echo htmlspecialchars($barang['nama_barang']); ?></td>
                                     <td class="py-3 px-4"><?php echo htmlspecialchars($barang['stok_barang']); ?></td>
                                     <td class="py-3 px-4"><?php echo htmlspecialchars($barang['harga_barang']); ?></td>
+                                    <td class="py-3 px-4"><?php echo $barang['status_barang'] == 1 ? "active" : "inactive"; ?></td>
                                     <td class="py-3 px-4">
                                         <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded mr-2">
                                             <a href="index.php?modul=barang&fitur=edit&id_barang=<?php echo $barang['id_barang']; ?>">Update</a>

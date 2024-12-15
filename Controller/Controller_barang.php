@@ -25,8 +25,8 @@ class BarangController {
 
     
 
-    public function create($nama, $harga, $gambar) {
-        $this->model->createBarang($nama, $harga, $gambar);
+    public function create($nama, $harga, $gambar, $status) {
+        $this->model->createBarang($nama, $harga, $gambar, $status);
         header("Location: index.php?modul=barang&fitur=list");
     }
 

@@ -127,9 +127,10 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
 
     <!-- Start Content -->
     <div class="container mt-4">
-        <div class="row">
-            <?php if (!empty($Barangs)) { ?>
-                <?php foreach ($Barangs as $item) { ?>
+    <div class="row">
+        <?php if (!empty($Barangs)) { ?>
+            <?php foreach ($Barangs as $item) { ?>
+                <?php if ($item['status_barang'] == 1) { // Tampilkan hanya jika status_barang == 1 ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
                             <img src="Views/customer/assets/img/<?php echo htmlspecialchars($item['gambar_barang']); ?>" class="w-full h-48 object-cover" alt="<?php echo htmlspecialchars($item['nama_barang']); ?>">
@@ -145,11 +146,13 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
                         </div>
                     </div>
                 <?php } ?>
-            <?php } else { ?>
-                <p class="text-center">Tidak ada data barang tersedia.</p>
             <?php } ?>
-        </div>
+        <?php } else { ?>
+            <p class="text-center">Tidak ada data barang tersedia.</p>
+        <?php } ?>
     </div>
+</div>
+
 
             </div>
                 <div div="row">

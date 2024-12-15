@@ -17,7 +17,7 @@ if ($modul === 'barang') {
 
         case 'input':
             // Contoh: Form input barang
-            $controller->create($_POST['nama_barang'],$_POST['stok_barang'], $_POST['harga_barang'], $_POST['gambar_barang']);
+            $controller->create($_POST['nama_barang'],$_POST['stok_barang'], $_POST['harga_barang'], $_POST['gambar_barang'], $_POST['status_barang']);
             break;
 
         // case 'delete':
