@@ -40,9 +40,9 @@ class ModelBarang {
     }
 
     public function createBarang($nama_barang,$stok_barang, $harga_barang, $gambar_barang, $status_barang) {
-        $query = "INSERT INTO db_barang (nama_barang,stok_barang, harga_barang, gambar_barang) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO db_barang (nama_barang,stok_barang, harga_barang, gambar_barang, status_barang) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ssss" , $nama_barang, $stok_barang,$harga_barang, $gambar_barang, $status_barang);
+        $stmt->bind_param("sssss" , $nama_barang, $stok_barang,$harga_barang, $gambar_barang, $status_barang);
         
         if ($stmt->execute()) {
             return true;
@@ -50,5 +50,7 @@ class ModelBarang {
 
         return false;
     }
+
+    
 }
 ?>

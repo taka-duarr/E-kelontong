@@ -133,7 +133,7 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
                 <?php if ($item['status_barang'] == 1) { // Tampilkan hanya jika status_barang == 1 ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
-                            <img src="Views/customer/assets/img/<?php echo htmlspecialchars($item['gambar_barang']); ?>" class="w-full h-48 object-cover" alt="<?php echo htmlspecialchars($item['nama_barang']); ?>">
+                            <img src="imgBarang/<?php echo htmlspecialchars($item['gambar_barang']); ?>" class="w-full h-48 object-cover" alt="<?php echo htmlspecialchars($item['nama_barang']); ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($item['nama_barang']); ?></h5>
                                 <p class="card-text">Harga: Rp <?php echo number_format($item['harga_barang'], 0, ',', '.'); ?></p>

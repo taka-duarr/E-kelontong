@@ -5,6 +5,7 @@ require_once 'Controller/Controller_barang.php';
 $modul = $_GET['modul'] ?? 'barang';
 $fitur = $_GET['fitur'] ?? 'list';
 
+
 $controller = new BarangController();
 
 if ($modul === 'barang') {
@@ -17,7 +18,7 @@ if ($modul === 'barang') {
 
         case 'input':
             // Contoh: Form input barang
-            $controller->create($_POST['nama_barang'],$_POST['stok_barang'], $_POST['harga_barang'], $_POST['gambar_barang'], $_POST['status_barang']);
+            $controller->addBarang();
             break;
 
         // case 'delete':

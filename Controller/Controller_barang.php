@@ -25,10 +25,40 @@ class BarangController {
 
     
 
-    public function create($nama, $harga, $gambar, $status) {
-        $this->model->createBarang($nama, $harga, $gambar, $status);
-        header("Location: index.php?modul=barang&fitur=list");
+    public function addBarang() {
+        // Pastikan metode ini tidak menerima argumen
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nama_barang = $_POST['nama_barang'] ?? null;
+            $stok_barang = $_POST['stok_barang'] ?? null;
+            $harga_barang = $_POST['harga_barang'] ?? null;
+            $gambar_barang = $_FILES['gambar_barang']['name'] ?? null;
+            $status_barang = $_POST['status_barang'] ?? null;
+    
+            // Validasi
+            if ($nama_barang && $stok_barang && $harga_barang && $status_barang) {
+                // Proses upload gambar
+                if (!empty($gambar_barang)) {
+                    $targetDir = "imgBarang/";
+                    $targetFile = $targetDir . basename($gambar_barang);
+                    move_uploaded_file($_FILES["gambar_barang"]["tmp_name"], $targetFile);
+                }
+    
+                // Simpan data
+                $this->model->createBarang($nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang);
+    
+                // Redirect ke halaman daftar barang
+                header("Location: index.php?modul=barang&fitur=list");
+                exit;
+            } else {
+                echo "Semua field harus diisi!";
+            }
+        } else {
+            // Jika bukan POST, tampilkan form input
+            include 'Views/admin/barang_input.php';
+        }
     }
+    
+    
 
     // public function delete($id_barang) {
     //     $this->model->deleteBarang($id_barang);
