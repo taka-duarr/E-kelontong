@@ -42,7 +42,7 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
                     <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
                     <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
                     <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+                    
                 </div>
             </div>
         </div>
@@ -54,10 +54,11 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-        <a class="navbar-brand text-dark fs-2 fw-bold"  
-            href="Views/customer/board.php">
-            E-KELONTONG
+        <a class="navbar-brand text-dark fs-2 fw-bold d-flex align-items-center" >
+        <img src="Views/customer/assets/img/logo.png" alt="Logo" class="me-2" style="width: 40px; height: 40px;">
+        E-Kelontong
         </a>
+
 
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,16 +69,16 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="Views/customer/board.php">Home</a>
+                            <a class="nav-link" href="Views/customer/board.php">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Views/customer/about.php">About</a>
+                            <a class="nav-link" href="Views/customer/about.php">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?modul=cust&fitur=shop">Shop</a>
+                            <a class="nav-link" href="index.php?modul=cust&fitur=shop">Toko</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Views/customer/contact.php">Contact</a>
+                            <a class="nav-link" href="Views/customer/contact.php">Lokasi</a>
                         </li>
                     </ul>
                 </div>
@@ -189,20 +190,40 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
             <div class="row">
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-light border-bottom pb-3 border-light logo">Zay Shop</h2>
+                    <h2 class="h2 text-light border-bottom pb-3 border-light logo">E-Kelontong</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
                             123 Consectetur at ligula 10660
                         </li>
-                        <li>
+                        
+                        
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Contact Us</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                    <li>
                             <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                            <a class="text-decoration-none" href="tel:081234567890">081234567890</a>
                         </li>
-                        <li>
+                    <li>
                             <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                            <a class="text-decoration-none" href="mailto:yasinmart@gmail.com">yasinmart@gmail.com</a>
                         </li>
+                    </ul>
+                </div>
+
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="Views/customer/board.php">Home</a></li>
+                        <li><a class="text-decoration-none" href="Views/customer/about.php">About Us</a></li>
+                        <li><a class="text-decoration-none" href="https://maps.app.goo.gl/hGEjCLpvxttXM9qd8">Shop Locations</a></li>
+                        
+                        <li><a class="text-decoration-none" href="Views/customer/contact.php">Contact</a></li>
                     </ul>
                 </div>
 
