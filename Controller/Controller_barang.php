@@ -35,7 +35,7 @@ class BarangController {
             $status_barang = $_POST['status_barang'] ?? null;
     
             // Validasi
-            if ($nama_barang && $stok_barang && $harga_barang && $status_barang) {
+            
                 // Proses upload gambar
                 if (!empty($gambar_barang)) {
                     $targetDir = "imgBarang/";
@@ -49,9 +49,7 @@ class BarangController {
                 // Redirect ke halaman daftar barang
                 header("Location: index.php?modul=barang&fitur=list");
                 exit;
-            } else {
-                echo "Semua field harus diisi!";
-            }
+            
         } else {
             // Jika bukan POST, tampilkan form input
             include 'Views/admin/barang_input.php';
