@@ -56,6 +56,25 @@
             case 'list':
                 $controller->listRole();
                 break;
+
+            case 'input':
+                $controller->addRole();
+                break;
+
+            case 'delete':
+                $controller->delete($_GET['id_role']);
+                break;
+
+            case 'edit':
+                $controller->edit($_GET['id_role']);
+                break;
+
+            case 'update':
+                $controller->update($_GET['id_role']);
+                break;
+
+            default:
+                echo "Fitur tidak ditemukan!";
             }
 
     }

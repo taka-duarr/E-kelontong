@@ -37,6 +37,52 @@ class ModelRole{
             return false;
         }
 
+        public function updateRole($id_role, $nama_role, $status_role){
+            $query = "UPDATE db_role SET nama_role = ?, status_role = ? WHERE id_role = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param("ssi", $nama_role, $status_role, $id_role);
+
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        }
+
+        public function deleteRole($id_role){
+            foreach($this->getAllRole() as $role) {
+                if ($role['id_role'] == $id_role) {
+                    $query = "DELETE FROM db_role WHERE id_role = ?";
+                    $stmt = $this->db->prepare($query);
+                    $stmt->bind_param("i", $id_role);
+                    $stmt->execute();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public function getRoles(){
+            return $this->db->query("SELECT * FROM db_role");
+        }
+
+        public function getRoleById($id_role){
+            foreach($this->getRoles() as $role) {
+                if ($role['id_role'] == $id_role) {
+                    return $role;
+                }
+            }
+            return null;
+        }
+
+        public function getRoleByName($nama_role){
+            foreach($this->getRoles() as $role) {
+                if ($role['nama_role'] == $nama_role) {
+                    return $role;
+                }
+            }
+            return null;
+        }
+
 
 }
 ?>

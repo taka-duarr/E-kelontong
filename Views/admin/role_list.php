@@ -48,12 +48,12 @@
                                     <td class="py-3 px-4"><?php echo $role['status_role'] == 1 ? "active" : "inactive"; ?></td>
                                     <td class="py-3 px-4">
                                         <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded mr-2">
-                                            <a href="index.php?modul=barang&fitur=edit&id_barang=<?php echo $role['id_role']; ?>">Update</a>
+                                            <a href="index.php?modul=role&fitur=edit&id_role=<?php echo $role['id_role']; ?>">Update</a>
                                         </button>
                                         <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">
-                                            <a href="index.php?modul=barang&fitur=delete&id_barang=<?php echo $role['id_role']; ?>">Delete</a>
+                                            <a href="index.php?modul=role&fitur=delete&id_role=<?php echo $role['id_role']; ?>">Delete</a>
                                         </button>
-                                    </td>
+                                    </td>   
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
