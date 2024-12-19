@@ -1,4 +1,5 @@
 <?php
+require_once 'Connect/Database.php';
 class ModelBarang {
     private $db;
 
@@ -8,20 +9,10 @@ class ModelBarang {
 
     
     
-        public function connectDatabase() {
-            $host = "localhost";
-            $user = "root";
-            $password = "";
-            $dbname = "toko_mlijo";
-    
-            $this->db = new mysqli($host, $user, $password, $dbname);
-    
-            if ($this->db->connect_error) {
-                return "Koneksi database gagal: " . $this->db->connect_error;
-            }
-    
-            return "Koneksi database berhasil!";
-        }
+    public function connectDatabase() {
+        $database = new Database(); // Membuat instance dari class Database
+        $this->db = $database->connect(); // Mengambil koneksi dari class Database
+    }
     
     
 

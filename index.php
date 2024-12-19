@@ -1,14 +1,17 @@
 <?php
 require_once 'Controller/Controller_barang.php';
+require_once 'Controller/Controller_role.php';
 
 // Routing berdasarkan modul dan fitur
+
 $modul = $_GET['modul'] ?? 'barang';
 $fitur = $_GET['fitur'] ?? 'list';
 
 
-$controller = new BarangController();
+
 
 if ($modul === 'barang') {
+    $controller = new BarangController();
     switch ($fitur) {
         case 'list':
             $controller->list_barang();
@@ -34,6 +37,7 @@ if ($modul === 'barang') {
             break;
     }
 }elseif ($modul === 'cust') {
+    $controller = new BarangController();
     switch ($fitur) {
         case 'shop':
             $controller->customerShop();
@@ -42,5 +46,13 @@ if ($modul === 'barang') {
             echo "Fitur tidak ditemukan!";
             break;
     }
+}elseif ($modul == 'role'){
+    $controller = new RoleController();
+    switch ($fitur) {
+        case 'list':
+            $controller->listRole();
+            break;
+        }
+
 }
 ?>

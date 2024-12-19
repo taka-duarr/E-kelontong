@@ -139,11 +139,11 @@ https://templatemo.com/tm-559-zay-shop
             </div>
         </div>
         
-    <!-- End Banner Hero -->
+    <!-- <-- End Banner Hero -->
 
 
     <!-- Start Categories of The Month -->
-    <section class="container py-5">
+    <!-- <section class="container py-5">
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">Categories of The Month</h1>
@@ -170,12 +170,12 @@ https://templatemo.com/tm-559-zay-shop
                 <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- End Categories of The Month -->
 
 
     <!-- Start Featured Product -->
-    <section class="bg-light">
+    <!-- <section class="bg-light">
         <div class="container py-5">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
@@ -260,8 +260,8 @@ https://templatemo.com/tm-559-zay-shop
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </div> -->
+    <!-- </section> -->
     <!-- End Featured Product -->
 
 <!-- footer -->
