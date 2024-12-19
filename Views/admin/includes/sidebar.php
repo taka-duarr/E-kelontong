@@ -1,4 +1,4 @@
-<div class="w-64 bg-gray-800 text-gray-100 h-screen">
+<div class="w-64 bg-gray-800 text-gray-100 min-h-screen">
     <div class="p-4 font-bold text-lg">Menu</div>
     <ul class="mt-4 space-y-2">
 

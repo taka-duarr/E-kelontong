@@ -13,5 +13,7 @@ class RoleController {
 
         include 'Views/admin/role_list.php';
     }
+
+    
 }
 ?>
