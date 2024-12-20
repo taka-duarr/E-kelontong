@@ -1,6 +1,7 @@
     <?php
     require_once 'Controller/Controller_barang.php';
     require_once 'Controller/Controller_role.php';
+    require_once 'Controller/Controller_user.php';
 
     // Routing berdasarkan modul dan fitur
 
@@ -76,6 +77,13 @@
             default:
                 echo "Fitur tidak ditemukan!";
             }
+    }elseif($modul === 'user'){
+        $controller = new UserController();
+        switch ($fitur) {
+            case 'list':
+                $controller->listUser();
+                break;
 
+            }
     }
     ?>
