@@ -84,6 +84,10 @@
                 $controller->listUser();
                 break;
 
+            case 'input':
+                $controller->addUser();
+                break;
+
             }
     }
     ?>

@@ -2,11 +2,15 @@
 require_once 'Connect/Database.php';
 require_once 'Model/Model_role.php';
 
+
+
 class ModelUser {
     private $db;
+    private $model_role;
 
     public function __construct() {
         $this->connectDatabase();
+        $this->model_role = new ModelRole();
     }
 
     public function connectDatabase() {
@@ -27,17 +31,20 @@ class ModelUser {
         return $user;
     }
 
-    // public function createUser($username, $password, $role) {
-    //     $role = $this->model_role->getRoleById($role);
-    //     $query = "INSERT INTO db_user (username, password, role) VALUES (?, ?, ?)";
-    //     $stmt = $this->db->prepare($query);
-    //     $stmt->bind_param("ssi", $username, $password, $role);
+    public function createUser($nama_user, $password_user, $nama_role) {
+        $query = "INSERT INTO db_user (nama_user, password_user, nama_role) VALUES (?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sss", $nama_user, $password_user, $nama_role);
 
-    //     if ($stmt->execute()) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function getUsers(){
+        return $this->db->query("SELECT * FROM db_users");
+    }
 
 
 }

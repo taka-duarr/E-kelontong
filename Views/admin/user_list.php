@@ -47,7 +47,7 @@
                                     <td class="py-3 px-4 text-blue-600"><?php echo htmlspecialchars($user['id_user']); ?></td>
                                     <td class="py-3 px-4"><?php echo htmlspecialchars($user['nama_user']); ?></td>
                                     <td class="py-3 px-4"><?php echo htmlspecialchars($user['password_user']); ?></td>
-                                    <td class="py-3 px-4"><?php echo htmlspecialchars($user['role_user']); ?></td>
+                                    <td class="py-3 px-4"><?php echo htmlspecialchars($user['nama_role']); ?></td>
                                     <td class="py-3 px-4">
                                         <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded mr-2">
                                             <a href="index.php?modul=user&fitur=edit&id_user=<?php echo $user['id_user']; ?>">Update</a>
