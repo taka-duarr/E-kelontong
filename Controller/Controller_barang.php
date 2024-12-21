@@ -72,13 +72,6 @@ class BarangController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Tangkap id_barang dari input hidden
             $id_barang = $_POST['id_barang'] ?? null;
-    
-            // Pastikan id_barang tidak null
-            if (!$id_barang) {
-                die('ID Barang tidak ditemukan!');
-            }
-    
-            // Tangkap data lainnya
             $nama_barang = $_POST['nama_barang'] ?? null;
             $stok_barang = $_POST['stok_barang'] ?? null;
             $harga_barang = $_POST['harga_barang'] ?? null;
@@ -97,17 +90,9 @@ class BarangController {
             }
     
             // Lakukan update barang
-            $updated = $this->model->updateBarang($id_barang, $nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang);
+            $this->model->updateBarang($id_barang, $nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang);
     
-            // Redirect jika berhasil
-            if ($updated) {
-                header("Location: index.php?modul=barang&fitur=list");
-                exit;
-            } else {
-                echo "Gagal memperbarui data!";
-            }
-        } else {
-            echo "Invalid request!";
+            header("Location: index.php?modul=barang&fitur=list");
         }
     }
     

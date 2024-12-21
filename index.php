@@ -71,8 +71,9 @@
                 break;
 
             case 'update':
-                $controller->update($_GET['id_role']);
+                $controller->update();
                 break;
+                
 
             default:
                 echo "Fitur tidak ditemukan!";
@@ -86,6 +87,18 @@
 
             case 'input':
                 $controller->addUser();
+                break;
+
+            case 'delete':
+                $controller->delete($_GET['id_user']);
+                break;
+
+            case 'edit':
+                $controller->edit($_GET['id_user']);
+                break;
+
+            case 'update':
+                $controller->update();
                 break;
 
             }

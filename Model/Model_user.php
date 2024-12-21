@@ -42,8 +42,50 @@ class ModelUser {
         return false;
     }
 
+    public function updateUser( $nama_user, $password_user, $nama_role, $id_user) {
+        $query = "UPDATE db_user SET nama_user = ?, password_user = ?, nama_role = ? WHERE id_user = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sssi", $nama_user, $password_user, $nama_role, $id_user);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+    
+    public function deleteUser($id_user) {
+        foreach ($this->getAllUser() as $user) {
+            if ($user['id_user'] == $id_user) {
+                $query = "DELETE FROM db_user WHERE id_user = ?";
+                $stmt = $this->db->prepare($query);
+                $stmt->bind_param("i", $id_user);
+                $stmt->execute();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function getUsers(){
-        return $this->db->query("SELECT * FROM db_users");
+        return $this->db->query("SELECT * FROM db_user");
+    }
+
+    public function getUserById($id_user) {
+        foreach($this->getUsers() as $user) {
+            if ($user['id_user'] == $id_user) {
+                return $user;
+            }
+        }
+        return null;
+    }
+
+    public function getUserByName($nama_user) {
+        foreach($this->getUsers() as $user) {
+            if ($user['nama_user'] == $nama_user) {
+                return $user;
+            }
+        }
+        return null;
     }
 
 

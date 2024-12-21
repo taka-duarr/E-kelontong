@@ -42,7 +42,7 @@ class RoleController {
         include 'Views/admin/role_update.php';
     }
 
-    public function update($id_role) {
+    public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_role = $_POST['id_role'] ?? null;
             $nama_role = $_POST['nama_role'] ?? null;
