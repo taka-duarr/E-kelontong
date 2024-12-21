@@ -2,6 +2,7 @@
     require_once 'Controller/Controller_barang.php';
     require_once 'Controller/Controller_role.php';
     require_once 'Controller/Controller_user.php';
+    require_once 'Controller/Controller_login.php';
 
     // Routing berdasarkan modul dan fitur
 
@@ -102,5 +103,12 @@
                 break;
 
             }
+        }elseif($modul === 'login'){
+                $controller = new LoginController();
+                switch ($fitur) {
+                    case 'login':
+                        $controller->login();
+                        break;
+                }
     }
     ?>
