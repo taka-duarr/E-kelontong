@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,8 @@
         crossorigin="anonymous"
     />
 </head>
+
+
 <body class="bg-white text-black">
     <div class="min-h-screen flex flex-col items-center justify-center">
         <div class="flex flex-col bg-black shadow-md px-6 py-8 rounded-3xl w-80 max-w-md">
@@ -27,7 +30,7 @@
                         <?php echo htmlspecialchars($error); ?>
                     </div>
                 <?php } ?>
-                <form method="POST">
+                <form method="POST" action="index.php?modul=login&fitur=login">
                     <div class="flex flex-col mb-5">
                         <label for="nama_user" class="mb-1 text-xs tracking-wide text-gray-300">Username:</label>
                         <div class="relative">

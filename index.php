@@ -1,16 +1,19 @@
     <?php
+    session_start();
     require_once 'Controller/Controller_barang.php';
     require_once 'Controller/Controller_role.php';
     require_once 'Controller/Controller_user.php';
     require_once 'Controller/Controller_login.php';
-
+    
     // Routing berdasarkan modul dan fitur
 
     $modul = $_GET['modul'] ?? 'barang';
     $fitur = $_GET['fitur'] ?? 'list';
 
-
-
+    if (!isset($_SESSION['user']) && ($_GET['modul'] ?? '') !== 'login') {
+        header('Location: index.php?modul=login&fitur=login');
+        exit;
+    }
 
     if ($modul === 'barang') {
         $controller = new BarangController();
@@ -109,6 +112,10 @@
                     case 'login':
                         $controller->login();
                         break;
+
+                    case 'logout':
+                        $controller->logout();
+                        exit;
                 }
     }
     ?>

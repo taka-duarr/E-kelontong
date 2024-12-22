@@ -36,22 +36,27 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
 </body>
     <!-- Close Header -->
 
-    <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 d-flex justify-content-between align-items-center">
+            <!-- Search Bar -->
+            <div class="input-group w-100" style="max-width: 90%;">
+                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ..." aria-label="Search" aria-describedby="basic-addon2">
+                <button class="btn btn-dark" type="submit">
+                    <i class="fa fa-fw fa-search text-white"></i>
+                </button>
             </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
+            
+            <!-- Cart Icon -->
+            <a class="nav-icon position-relative text-decoration-none" href="#">
+                <i class="fa fa-fw fa-cart-arrow-down text-dark ms-3"></i>
+                
+            </a>
         </div>
     </div>
+</div>
+
+
 
     <style>
         .img-container {
