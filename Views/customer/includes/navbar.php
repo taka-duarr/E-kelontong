@@ -94,7 +94,7 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
                     <a class="nav-icon position-relative text-decoration-none ms-3">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none ms-3" href="index.php?modul=cust&fitur=logout">
+                    <a class="nav-icon position-relative text-decoration-none ms-3" href="index.php?modul=login&fitur=logout">
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </a>
                 </div>
