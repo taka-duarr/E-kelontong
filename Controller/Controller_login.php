@@ -51,6 +51,7 @@ class LoginController
 
     public function logout() {
         header("Location: index.php?modul=login&fitur=login");
+        
     }
     
     
