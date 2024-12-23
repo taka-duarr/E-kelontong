@@ -24,12 +24,22 @@
             </div>
 
             <div class="mt-10">
-                <form action="#">
+            <?php if (!empty($error)): ?>
+            <div class="bg-red-100 text-red-600 p-3 rounded mb-4">
+                <?= $error ?>
+                </div>
+            <?php endif; ?>
+            <?php if (!empty($success)): ?>
+                <div class="bg-green-100 text-green-600 p-3 rounded mb-4">
+                    <?= $success ?>
+                </div>
+            <?php endif; ?>
+                <form action="index.php?modul=login&fitur=register" method="POST">
                     <div class="flex flex-col mb-5">
                         <label
-                            for="email"
+                            for="nama_user"
                             class="mb-1 text-xs tracking-wide text-gray-300"
-                        >E-Mail Address:</label>
+                        >Username:</label>
                         <div class="relative">
                             <div
                                 class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400"
@@ -38,9 +48,9 @@
                             </div>
 
                             <input
-                                id="email"
-                                type="email"
-                                name="email"
+                                id="nama_user"
+                                type="nama_user"
+                                name="nama_user"
                                 class="
                                     text-sm
                                     placeholder-gray-400
@@ -54,13 +64,13 @@
                                     py-2
                                     focus:outline-none focus:border-blue-400
                                 "
-                                placeholder="Enter your email"
+                                placeholder="Enter your username"
                             />
                         </div>
                     </div>
                     <div class="flex flex-col mb-6">
                         <label
-                            for="password"
+                            for="password_user"
                             class="mb-1 text-xs sm:text-sm tracking-wide text-gray-300"
                         >Password:</label>
                         <div class="relative">
@@ -71,9 +81,9 @@
                             </div>
 
                             <input
-                                id="password"
-                                type="password"
-                                name="password"
+                                id="password_user"
+                                type="password_user"
+                                name="password_user"
                                 class="
                                     text-sm
                                     placeholder-gray-400
@@ -119,7 +129,7 @@
                     </div>
                     <div class="flex justify-center items-center mt-6">
                         <a
-                            href="login.php"
+                            href="index.php?modul=login&fitur=login"
                             class="inline-flex items-center text-white text-xs font-medium"
                         >
                             <span>Sudah punya akun? <span class="text-blue-500 font-semibold">Login disini</span></span>

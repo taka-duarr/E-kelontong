@@ -76,7 +76,7 @@
                     </div>
                     <div class="flex justify-center items-center mt-6">
                         <a
-                            href="register.php"
+                            href="index.php?modul=login&fitur=register"
                             class="inline-flex items-center text-white text-xs font-medium"
                         >
                             <span>Belum punya akun? <span class="text-blue-500 font-semibold">Daftar disini</span></span>

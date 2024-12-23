@@ -53,6 +53,34 @@ class LoginController
         header("Location: index.php?modul=login&fitur=login");
         
     }
+
+    public function register()
+    {
+        $error = null;
+        $success = null;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $username = $_POST['nama_user'] ?? null;
+            $password = $_POST['password_user'] ?? null;
+            $role = 'customer'; // Role fixed sebagai 'customer'
+
+            if ($username && $password) {
+                // Validasi jika username sudah ada
+                $existingUser = $this->modelUser->getUserByName($username);
+                if ($existingUser) {
+                    $error = "Username sudah digunakan, coba yang lain.";
+                } else {
+                    // Tambahkan user ke database
+                    $this->modelUser->createUser($username, $password, $role);
+                    $success = "Pendaftaran berhasil! Silakan login.";
+                }
+            } else {
+                $error = "Harap isi semua kolom.";
+            }
+        }
+
+        include 'Views/register.php'; // Tampilkan halaman register
+    }
     
     
     

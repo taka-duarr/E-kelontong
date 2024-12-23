@@ -116,6 +116,10 @@
                     case 'logout':
                         $controller->logout();
                         exit;
+                    
+                    case 'register':
+                        $controller->register();
+                        break;
                 }
     }
     ?>
