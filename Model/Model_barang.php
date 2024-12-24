@@ -90,7 +90,6 @@ class ModelBarang {
         }
         return null;
     }
-
     
 
     

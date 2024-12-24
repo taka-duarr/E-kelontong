@@ -48,7 +48,7 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
             </div>
             
             <!-- Cart Icon -->
-            <a class="nav-icon position-relative text-decoration-none" href="#">
+            <a href="index.php?modul=cart&fitur=list" class="nav-icon position-relative text-decoration-none" >
                 <i class="fa fa-fw fa-cart-arrow-down text-dark ms-3"></i>
                 
             </a>
@@ -92,9 +92,15 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
                                 <p class="card-text">Stok: <?php echo htmlspecialchars($item['stok_barang']); ?></p>
                             </div>
                             <div class="card-footer text-center">
-                                <a href="#" class="btn btn-dark" >  <i class="fa fa-fw fa-cart-arrow-down text-light me-2"></i>Keranjang</a>
-                                
-                            </div>
+                            <form method="POST" action="index.php?modul=cart&fitur=add">
+                                <input type="hidden" name="barang_id" value="<?php echo $item['id_barang']; ?>">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-dark">
+                                    <i class="fa fa-fw fa-cart-arrow-down text-light me-2"></i>Keranjang
+                                </button>
+                            </form>
+                        </div>
+
                         </div>
                     </div>
                 <?php } ?>

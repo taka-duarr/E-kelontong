@@ -4,6 +4,7 @@
     require_once 'Controller/Controller_role.php';
     require_once 'Controller/Controller_user.php';
     require_once 'Controller/Controller_login.php';
+    require_once 'Controller/Controller_keranjang.php';
     
     // Routing berdasarkan modul dan fitur
 
@@ -121,5 +122,16 @@
                         $controller->register();
                         break;
                 }
+    }elseif($modul === 'cart'){
+        $controller = new ControllerKeranjang();
+        switch ($fitur) {
+            case 'list':
+                $controller->listCartItems();
+                break;
+
+            case 'add':
+                $controller->addToCart();
+                break;
+        }
     }
     ?>
