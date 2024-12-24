@@ -20,9 +20,9 @@
     <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
       <!-- Cart Items -->
       <div class="rounded-lg md:w-2/3">
-        <?php foreach ($Barangs as $item) { ?>
+        <?php foreach ($Carts as $item) { ?>
         <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-          <img src="<?php echo htmlspecialchars($item['gambar_barang']); ?>" alt="product-image" class="w-full rounded-lg sm:w-40" />
+          <img src="imgBarang/<?php echo htmlspecialchars($item['gambar_barang']); ?>" alt="product-image" class="w-full rounded-lg sm:w-40" />
           <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
             <div class="mt-5 sm:mt-0">
               <h2 class="text-lg font-bold text-gray-900"><?php echo htmlspecialchars($item['nama_barang']); ?></h2>

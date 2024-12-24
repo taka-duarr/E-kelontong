@@ -10,11 +10,6 @@ class ControllerKeranjang {
 
     public function addToCart() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
-            // if (!isset($_SESSION['id_user'])) {
-            //     header('Location: index.php?modul=login&fitur=login');
-            //     exit;
-            // }
 
             $userId = $_SESSION['id_user']['id'];
             $barangId = $_POST['id_barang'];
@@ -30,15 +25,23 @@ class ControllerKeranjang {
         }
     }
 
-    public function listCartItems() {
-        
-        // if (!isset($_SESSION['id_user'])) {
-        //     header('Location: index.php?modul=login&fitur=login');
-        //     exit;
-        // }
+    
+        public function listCartItems() {
+            $id_user = $_SESSION['user'] ?? null;
+    
+            if ($id_user === null) {
+                die("ID user tidak ditemukan. Pastikan Anda sudah login.");
+            }
+    
+            
+            $Carts = $this->ModelKeranjang->getCartItems($id_user['id']);
 
-        $userId = $_SESSION['user']['id'];
-        $items = $this->ModelKeranjang->getCartItems($userId);
-        include 'Views/customer/cart.php';
-    }
+            echo '<pre>';
+    print_r($Carts);
+    echo '</pre>';
+    
+            require_once 'Views/customer/cart.php'; // Tampilkan data keranjang
+        }
+    
+    
 }
