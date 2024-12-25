@@ -35,7 +35,7 @@
                 <span class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
               </div>
               <div class="flex items-center space-x-4">
-                <p class="text-sm"><?php echo number_format($item['harga_barang'], 2); ?> ₭</p>
+                <p class="text-sm">Rp <?php echo number_format($item['harga_barang'], 2); ?></p>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>

@@ -12,18 +12,18 @@ class ModelKeranjang {
         $this->db = $database->connect(); // Mengambil koneksi dari class Database
     }
 
-    public function addToCart($id_user, $id_barang, $jumlah = 1) {
+    public function createKeranjang($id_user, $id_barang, $jumlah = 1) {
         $query = "INSERT INTO db_cart (id_user, id_barang, jumlah) 
-                  VALUES (:id_user, :id_barang, :jumlah) 
-                  ON DUPLICATE KEY UPDATE jumlah = jumlah + :jumlah";
+                  VALUES (?, ?, ?) 
+                  ON DUPLICATE KEY UPDATE jumlah = jumlah + ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':id_user', $id_user);
-        $stmt->bindParam(':id_barang', $id_barang);
-        $stmt->bindParam(':jumlah', $jumlah);
-        return $stmt->execute();
+        $stmt->bind_param("iiii", $id_user, $id_barang, $jumlah, $jumlah);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
     }
 
-    public function getCartItems($id_user) {
+    public function getAllKeranjang($id_user) {
         // Query yang sudah diperbaiki
         $sql = "SELECT c.id_cart, b.nama_barang, b.harga_barang, c.jumlah, b.gambar_barang
                 FROM db_cart c
@@ -56,6 +56,8 @@ class ModelKeranjang {
 
 
     }
+
+   
     
 }
     

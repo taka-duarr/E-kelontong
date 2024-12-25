@@ -126,11 +126,11 @@
         $controller = new ControllerKeranjang();
         switch ($fitur) {
             case 'list':
-                $controller->listCartItems();
+                $controller->listKeranjang();
                 break;
 
             case 'add':
-                $controller->addToCart();
+                $controller->addKeranjang();
                 break;
         }
     }

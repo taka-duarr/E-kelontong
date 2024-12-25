@@ -8,14 +8,14 @@ class ControllerKeranjang {
         $this->ModelKeranjang = new ModelKeranjang();
     }
 
-    public function addToCart() {
+    public function addKeranjang() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $userId = $_SESSION['id_user']['id'];
-            $barangId = $_POST['id_barang'];
+            $userId = $_SESSION['user'] ?? null;
+            $barangId = $_POST['id_barang'] ?? null;
             $jumlah = $_POST['jumlah'] ?? 1;
 
-            $result = $this->ModelKeranjang->addToCart($userId, $barangId, $jumlah);
+            $result = $this->ModelKeranjang->createKeranjang($userId, $barangId, $jumlah);
 
             if ($result) {
                 header('Location: index.php?modul=cart&fitur=list');
@@ -26,7 +26,7 @@ class ControllerKeranjang {
     }
 
     
-        public function listCartItems() {
+        public function listKeranjang() {
             $id_user = $_SESSION['user'] ?? null;
     
             if ($id_user === null) {
@@ -34,7 +34,7 @@ class ControllerKeranjang {
             }
     
             
-            $Carts = $this->ModelKeranjang->getCartItems($id_user['id']);
+            $Carts = $this->ModelKeranjang->getAllKeranjang($id_user['id']);
 
             echo '<pre>';
     print_r($Carts);
