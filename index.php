@@ -124,6 +124,12 @@
                 }
     }elseif($modul === 'cart'){
         $controller = new ControllerKeranjang();
+        // echo '<pre>';
+        // print_r($_SERVER);
+        // print_r($_POST);
+        // print_r($_GET);
+        // echo '</pre>';
+        // die();
         switch ($fitur) {
             case 'list':
                 $controller->listKeranjang();
@@ -134,4 +140,5 @@
                 break;
         }
     }
+
     ?>

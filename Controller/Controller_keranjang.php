@@ -10,12 +10,23 @@ class ControllerKeranjang {
 
     public function addKeranjang() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        //     echo '<pre>';
+        // print_r($_POST); // Debug data POST
+        // echo '</pre>';
 
-            $userId = $_SESSION['user'] ?? null;
-            $barangId = $_POST['id_barang'] ?? null;
+
+        // echo '<pre>';
+        // print_r($_SERVER);
+        // print_r($_POST);
+        // print_r($_GET);
+        // echo '</pre>';
+        // die();
+
+            $id_user = $_SESSION['user'] ?? null;
+            $id_barang = $_POST['id_barang'] ?? null;
             $jumlah = $_POST['jumlah'] ?? 1;
 
-            $result = $this->ModelKeranjang->createKeranjang($userId, $barangId, $jumlah);
+            $result = $this->ModelKeranjang->createKeranjang($id_user, $id_barang, $jumlah);
 
             if ($result) {
                 header('Location: index.php?modul=cart&fitur=list');
@@ -34,11 +45,11 @@ class ControllerKeranjang {
             }
     
             
-            $Carts = $this->ModelKeranjang->getAllKeranjang($id_user['id']);
+            $Carts = $this->ModelKeranjang->getAllKeranjang($id_user);
 
-            echo '<pre>';
-    print_r($Carts);
-    echo '</pre>';
+    //         echo '<pre>';
+    // print_r($Carts);
+    // echo '</pre>';
     
             require_once 'Views/customer/cart.php'; // Tampilkan data keranjang
         }

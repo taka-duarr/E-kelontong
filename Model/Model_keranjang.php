@@ -1,5 +1,6 @@
 <?php
 require_once 'Connect/Database.php';
+require_once 'Model/Model_barang.php';
 class ModelKeranjang {
     private $db;
 

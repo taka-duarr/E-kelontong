@@ -49,17 +49,17 @@
       <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
         <div class="mb-2 flex justify-between">
           <p class="text-gray-700">Subtotal</p>
-          <p class="text-gray-700">$<?php echo number_format($subtotal, 2); ?></p>
+          <!-- <p class="text-gray-700">$<?php echo number_format($subtotal, 2); ?></p> -->
         </div>
         <div class="flex justify-between">
           <p class="text-gray-700">Shipping</p>
-          <p class="text-gray-700">$<?php echo number_format($shipping, 2); ?></p>
+          <!-- <p class="text-gray-700">$<?php echo number_format($shipping, 2); ?></p> -->
         </div>
         <hr class="my-4" />
         <div class="flex justify-between">
           <p class="text-lg font-bold">Total</p>
           <div class="">
-            <p class="mb-1 text-lg font-bold">$<?php echo number_format($total, 2); ?> USD</p>
+            <!-- <p class="mb-1 text-lg font-bold">$<?php echo number_format($total, 2); ?> USD</p> -->
             <p class="text-sm text-gray-700">including VAT</p>
           </div>
         </div>

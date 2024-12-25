@@ -1,5 +1,6 @@
 <!-- <?php var_dump($Barangs); ?> -->
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,7 +94,7 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
                             </div>
                             <div class="card-footer text-center">
                             <form method="POST" action="index.php?modul=cart&fitur=add">
-                                <input type="hidden" name="barang_id" value="<?php echo $item['id_barang']; ?>">
+                                <input type="hidden" name="id_barang" value="<?php echo htmlspecialchars($item['id_barang']); ?>">
                                 <input type="hidden" name="quantity" value="1">
                                 <button type="submit" class="btn btn-dark">
                                     <i class="fa fa-fw fa-cart-arrow-down text-light me-2"></i>Keranjang
