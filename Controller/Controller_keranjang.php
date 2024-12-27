@@ -22,7 +22,7 @@ class ControllerKeranjang {
         // echo '</pre>';
         // die();
 
-            $id_user = $_SESSION['user'] ?? null;
+            $id_user = $_SESSION['user']['id'] ?? null;
             $id_barang = $_POST['id_barang'] ?? null;
             $jumlah = $_POST['jumlah'] ?? 1;
 
