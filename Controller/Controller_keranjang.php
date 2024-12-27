@@ -45,7 +45,7 @@ class ControllerKeranjang {
             }
     
             
-            $Carts = $this->ModelKeranjang->getAllKeranjang($id_user);
+            $Carts = $this->ModelKeranjang->getAllKeranjang($id_user['id']);
 
     //         echo '<pre>';
     // print_r($Carts);
