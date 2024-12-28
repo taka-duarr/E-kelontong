@@ -138,6 +138,14 @@
             case 'add':
                 $controller->addKeranjang();
                 break;
+
+            case 'delete':
+                $controller->deleteKeranjang($_GET['id_cart']);
+                break;  
+
+            case 'update':
+                $controller->updateKeranjang();
+                break;
         }
     }
 

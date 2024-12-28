@@ -55,7 +55,7 @@ class ModelKeranjang {
 
     public function getAllKeranjang($id_user) {
         // Query yang sudah diperbaiki
-        $sql = "SELECT c.id_cart, b.nama_barang, b.harga_barang, c.jumlah, b.gambar_barang
+        $sql = "SELECT c.id_cart, b.nama_barang, b.harga_barang, c.jumlah, b.gambar_barang, b.id_barang
                 FROM db_cart c
                 JOIN db_barang b ON c.id_barang = b.id_barang
                 WHERE c.id_user = ?"; // Gunakan ? sebagai placeholder
@@ -87,13 +87,38 @@ class ModelKeranjang {
 
     }
 
+    public function deleteKeranjang($id_cart) {
+        $query = "DELETE FROM db_cart WHERE id_cart = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_cart);
+        $stmt->execute();
+        return $stmt->affected_rows > 0;
+    }
+
+    public function updateKeranjang($id_barang, $jumlah) {
+        $query = "UPDATE db_cart SET jumlah = ? WHERE id_barang = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $jumlah, $id_barang);
+        $stmt->execute();
+        return $stmt->affected_rows > 0;
+    }
+
+    
+    
     public function getKeranjangByUser($id_user) {
-        $query = "SELECT * FROM db_keranjang WHERE id_user = ?";
+        $query = "SELECT * FROM keranjang WHERE id_user = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id_user);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function clearKeranjangByUser($id_user) {
+        $query = "DELETE FROM keranjang WHERE id_user = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_user);
+        $stmt->execute();
     }
     
 

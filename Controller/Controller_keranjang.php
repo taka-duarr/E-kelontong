@@ -29,7 +29,8 @@ class ControllerKeranjang {
             $result = $this->ModelKeranjang->createKeranjang($id_user, $id_barang, $jumlah);
 
             if ($result) {
-                header('Location: index.php?modul=cart&fitur=list');
+                $_SESSION['notification'] = "Item berhasil ditambahkan ke keranjang!";
+                header('Location: index.php?modul=cust&fitur=shop');
             } else {
                 echo "Error adding to cart.";
             }
@@ -53,6 +54,27 @@ class ControllerKeranjang {
     
             require_once 'Views/customer/cart.php'; // Tampilkan data keranjang
         }
+
+    public function deleteKeranjang($id_cart) {
+        $result = $this->ModelKeranjang->deleteKeranjang($id_cart);
+        header('Location: index.php?modul=cart&fitur=list');
+    }
+
+    public function updateKeranjang() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id_barang = $_POST['id_barang'] ?? null;
+            $jumlah = $_POST['jumlah'] ?? 1;
+
+            $result = $this->ModelKeranjang->updateKeranjang($id_barang, $jumlah);
+
+            if ($result) {
+                $_SESSION['notification'] = "Item berhasil diupdate!";
+                header('Location: index.php?modul=cart&fitur=list');
+            } else {
+                echo "Error updating cart.";
+            }
+        }
+    }
     
     
 }

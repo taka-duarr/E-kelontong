@@ -19,13 +19,8 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-<!--
-    
-TemplateMo 559 Zay Shop
-
-https://templatemo.com/tm-559-zay-Views/customer/shop
-
--->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -47,7 +42,21 @@ https://templatemo.com/tm-559-zay-Views/customer/shop
                     <i class="fa fa-fw fa-search text-white"></i>
                 </button>
             </div>
-            
+
+            <?php
+            if (isset($_SESSION['notification'])) {
+                echo "<script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: '{$_SESSION['notification']}',
+                        confirmButtonText: 'OK'
+                    });
+                </script>";
+                unset($_SESSION['notification']); // Hapus notifikasi setelah ditampilkan
+            }
+            ?>
+
             <!-- Cart Icon -->
             <a href="index.php?modul=cart&fitur=list" class="nav-icon position-relative text-decoration-none" >
                 <i class="fa fa-fw fa-cart-arrow-down text-dark ms-3"></i>
