@@ -5,6 +5,7 @@
     require_once 'Controller/Controller_user.php';
     require_once 'Controller/Controller_login.php';
     require_once 'Controller/Controller_keranjang.php';
+    require_once 'Controller/Controller_transaksi.php';
     
     // Routing berdasarkan modul dan fitur
 
@@ -147,6 +148,18 @@
                 $controller->updateKeranjang();
                 break;
         }
+    }elseif($modul === 'transaksi'){
+        $controller = new TransaksiController();
+        switch ($fitur) {
+            case 'list':
+                $controller->listTransaksi();
+                break;
+            case 'add':
+                $controller->checkout($_SESSION['user']['id'], $_SESSION['cart']);
+                    break;
+        }
+    }else{
+        echo "Modul tidak ditemukan!";
     }
 
     ?>

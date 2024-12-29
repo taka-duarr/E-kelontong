@@ -40,6 +40,9 @@ class ControllerKeranjang {
     
         public function listKeranjang() {
             $id_user = $_SESSION['user'] ?? null;
+
+            
+
     
             if ($id_user === null) {
                 die("ID user tidak ditemukan. Pastikan Anda sudah login.");
@@ -47,6 +50,16 @@ class ControllerKeranjang {
     
             
             $Carts = $this->ModelKeranjang->getAllKeranjang($id_user['id']);
+
+            // Menambahkan item ke dalam session cart
+            foreach ($Carts as $item) {
+                $_SESSION['cart'][] = [
+                    'id_barang' => $item['id_barang'],  // Pastikan kolom ini ada dalam data Carts
+                    'jumlah' => $item['jumlah'],        // Pastikan kolom ini ada dalam data Carts
+                    'harga_barang' => $item['harga_barang']    // Pastikan kolom ini ada dalam data Carts
+                ];
+            }
+
 
     //         echo '<pre>';
     // print_r($Carts);

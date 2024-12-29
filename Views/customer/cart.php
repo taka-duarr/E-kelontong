@@ -1,6 +1,6 @@
-<!-- <?php
-var_dump($Carts); // Debug isi data keranjang
-?> -->
+<?php
+// var_dump($Carts); // Debug isi data keranjang
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +21,7 @@ var_dump($Carts); // Debug isi data keranjang
 <body>
   <div class="min-h-screen bg-gray-100 pt-20">
     <h1 class="mb-10 text-center text-2xl font-bold">Keranjang</h1>
+    
 
     <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
       <!-- Cart Items -->
@@ -88,9 +89,15 @@ var_dump($Carts); // Debug isi data keranjang
             
           </div>
         </div>
-        <button class="mt-6 w-full rounded-md bg-black py-1.5 font-medium text-white hover:bg-gray-800">Check out</button>
+        <form action="index.php?modul=transaksi&fitur=add" method="post">
+            <input type="hidden" name="id_user" value="<?= $_SESSION['user'] ?>">
+            <button type="submit" class="px-6 py-3 text-white bg-black rounded-lg hover:bg-gray-800">
+                Checkout
+            </button>
+        </form>
       </div>
     </div>
+    
   </div>
 
   <div class="mt-10 mb-10 flex justify-center">

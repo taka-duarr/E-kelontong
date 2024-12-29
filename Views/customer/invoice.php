@@ -1,3 +1,7 @@
+<pre>
+<?php print_r($details); ?>
+</pre>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,38 +28,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-gray-50 border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-4 py-2">1</td>
-                        <td class="px-4 py-2">Beras 5kg</td>
-                        <td class="px-4 py-2">2</td>
-                        <td class="px-4 py-2">Rp 65,000</td>
-                        <td class="px-4 py-2">Rp 130,000</td>
-                    </tr>
-                    <tr class="bg-gray-50 border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-4 py-2">2</td>
-                        <td class="px-4 py-2">Minyak Goreng 2L</td>
-                        <td class="px-4 py-2">1</td>
-                        <td class="px-4 py-2">Rp 50,000</td>
-                        <td class="px-4 py-2">Rp 50,000</td>
-                    </tr>
+                    
+                <?php $index = 0; ?>
+                <?php foreach ($details as $detail): ?>
+                <tr class="bg-gray-50 border-b border-gray-200 hover:bg-gray-100">
+                    <td class="px-4 py-2"><?= ++$index ?></td>
+                    <td class="px-4 py-2"><?= $detail['nama_barang'] ?></td>
+                    <td class="px-4 py-2"><?= $detail['jumlah'] ?></td>
+                    <td class="px-4 py-2">Rp <?= number_format($detail['harga_satuan'], 0, ',', '.') ?></td>
+                    <td class="px-4 py-2">Rp <?= number_format($detail['subtotal'], 0, ',', '.') ?></td>
+                </tr>
+                <?php endforeach; ?>
+                    
+                    
                 </tbody>
             </table>
 
             <div class="mt-6 border-t border-gray-200 pt-4">
                 <div class="flex justify-between text-black">
-                    <span>Subtotal</span>
-                    <span>Rp 180,000</span>
-                </div>
-                <div class="flex justify-between text-black mt-2">
-                    <span>Pajak (10%)</span>
-                    <span>Rp 18,000</span>
-                </div>
-                <div class="flex justify-between font-bold text-black text-lg mt-4">
-                    <span>Total</span>
-                    <span>Rp 198,000</span>
-                </div>
-                <div class="flex justify-between text-black mt-2">
-                    <span>status </span>
+                <?php foreach ($details as $detail): ?>
+                <tr>
+                    <td><?= $index + 1 ?></td>
+                    <td><?= $detail['nama_barang'] ?></td>
+                    <td><?= $detail['jumlah'] ?></td>
+                    <td>Rp <?= number_format($detail['harga'], 0, ',', '.') ?></td>
+                    <td>Rp <?= number_format($detail['subtotal'], 0, ',', '.') ?></td>
+                </tr>
+                <?php endforeach; ?>
                     
                 </div>
             </div>
