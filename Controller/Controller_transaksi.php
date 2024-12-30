@@ -12,32 +12,37 @@
         }
     
         public function checkout($id_user, $cart_items) {
-            $total_harga = 0;
-            foreach ($cart_items as $item) {
-                $total_harga += $item['harga'] * $item['jumlah'];
-            }
-    
-            // Simpan transaksi utama
-            $status = 1; // Status transaksi 'Diproses'
-            $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status);
-    
-            if ($id_transaksi) {
-                // Simpan detail transaksi
-                foreach ($cart_items as $item) {
-                    $id_barang = $item['id_barang'];
-                    $jumlah = $item['jumlah'];
-                    $total_harga_item = $item['harga'] * $jumlah;
-                    $this->model->saveDetailTransaksi($id_transaksi, $id_barang, $jumlah, $total_harga_item);
-                }
-    
-                // Setelah transaksi disimpan, arahkan pengguna ke halaman transaksi list
-                header("Location: index.php?modul=transaksi&fitur=list");
-                exit;
-            } else {
-                echo "Gagal menyimpan transaksi!";
-            }
-    
+        $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+        
+       
+
+
+        // Menghitung total harga dari keranjang
+        $total_harga = 0;
+        foreach ($cart_items as $item) {
+            $total_harga += $item['jumlah'] * $item['jumlah'];
         }
+
+        // Menyimpan transaksi baru
+        $status = 'pending'; // Status bisa disesuaikan sesuai kebutuhan
+        $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status);
+
+        if ($id_transaksi) {
+            // Menyimpan detail transaksi
+            foreach ($cart_items as $item) {
+                $this->model->saveDetailTransaksi($id_transaksi, $item['id_barang'], $item['jumlah'], $item['jumlah'] * $item['jumlah']);
+            }
+
+            // Menghapus data keranjang setelah checkout
+            // $model->deleteCartItems($id_user);
+
+            // Redirect atau beri feedback setelah transaksi berhasil
+            echo "Transaksi berhasil dilakukan, ID Transaksi: " . $id_transaksi;
+        } else {
+            // Jika ada kesalahan saat membuat transaksi
+            echo "Gagal melakukan transaksi.";
+        }
+    }
         public function listTransaksi() {
             $id_user = $_SESSION['user']['id'];
             $transaksi = $this->model->getListTransaksi($id_user);

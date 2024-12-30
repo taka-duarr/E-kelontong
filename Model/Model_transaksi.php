@@ -16,13 +16,33 @@ class ModelTransaksi {
 
     // Simpan transaksi uta
 
-    public function saveTransaksi($id_user, $id_barang, $jumlah, $total_harga, $status) {
-        $query = "INSERT INTO db_transaksi (id_user, id_barang, jumlah, total_harga, status) VALUES (?, ?, ?, ?, ?)";
+    public function saveTransaksi($id_user, $total_harga, $status) {
+        $query = "INSERT INTO db_transaksi (id_user, total_harga, status, tanggal) VALUES (?, ?, ?, NOW())";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("iiidi", $id_user, $id_barang, $jumlah, $total_harga, $status);
+        $stmt->bind_param("iii", $id_user, $total_harga, $status);
 
-        return $stmt->execute();    
+        if ($stmt->execute()) {
+            return $this->db->insert_id; // Mengembalikan id_transaksi yang baru dibuat
+        }
+        return false;
     }
+
+    // Menyimpan detail transaksi
+    public function saveDetailTransaksi($id_transaksi, $id_barang, $jumlah, $total_harga_item) {
+        $query = "INSERT INTO db_detail_transaksi (id_transaksi, id_barang, jumlah, total_harga) VALUES (?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("iiii", $id_transaksi, $id_barang, $jumlah, $total_harga_item);
+        return $stmt->execute();
+    }
+
+    // Menghapus item dari keranjang setelah checkout
+    // public function deleteCartItems($id_user) {
+    //     $query = "DELETE FROM db_cart WHERE id_user = ?";
+    //     $stmt = $this->db->prepare($query);
+    //     $stmt->bind_param("i", $id_user);
+    //     return $stmt->execute();
+    // }
+
 
     public function getListTransaksi($id_user) {
         $query = "

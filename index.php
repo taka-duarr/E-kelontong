@@ -150,6 +150,7 @@
         }
     }elseif($modul === 'transaksi'){
         $controller = new TransaksiController();
+        $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
         switch ($fitur) {
             case 'list':
                 $controller->listTransaksi();
