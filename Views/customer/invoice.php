@@ -1,5 +1,5 @@
 <pre>
-<?php print_r($details); ?>
+<?php print_r($transaksi); ?>
 </pre>
 
 <!DOCTYPE html>
@@ -29,30 +29,29 @@
                 </thead>
                 <tbody>
                     
-                <?php $index = 0; ?>
-                <?php foreach ($details as $detail): ?>
-                <tr class="bg-gray-50 border-b border-gray-200 hover:bg-gray-100">
-                    <td class="px-4 py-2"><?= ++$index ?></td>
-                    <td class="px-4 py-2"><?= $detail['nama_barang'] ?></td>
-                    <td class="px-4 py-2"><?= $detail['jumlah'] ?></td>
-                    <td class="px-4 py-2">Rp <?= number_format($detail['harga_satuan'], 0, ',', '.') ?></td>
-                    <td class="px-4 py-2">Rp <?= number_format($detail['subtotal'], 0, ',', '.') ?></td>
+                <?php foreach ($transaksi as $index => $t): ?>
+                <tr class="border-b">
+                    <td class="px-4 py-2"><?= $index + 1 ?></td>
+                    <td class="px-4 py-2"><?= $t['nama_barang'] ?></td>
+                    <td class="px-4 py-2"><?= $t['jumlah'] ?></td>
+                    <td class="px-4 py-2">Rp <?= number_format($t['harga_barang']) ?></td>
+                    <td class="px-4 py-2">Rp <?= number_format($t['total_harga']) ?></td>
+
+                    
                 </tr>
                 <?php endforeach; ?>
                     
                     
-                </tbody>
+                </tbody>    
             </table>
 
             <div class="mt-6 border-t border-gray-200 pt-4">
                 <div class="flex justify-between text-black">
-                <?php foreach ($details as $detail): ?>
-                <tr>
-                    <td><?= $index + 1 ?></td>
-                    <td><?= $detail['nama_barang'] ?></td>
-                    <td><?= $detail['jumlah'] ?></td>
-                    <td>Rp <?= number_format($detail['harga'], 0, ',', '.') ?></td>
-                    <td>Rp <?= number_format($detail['subtotal'], 0, ',', '.') ?></td>
+                <?php foreach ($transaksi as $t): ?>
+                <tr class="border-b">
+                    <td class="px-4 py-2"><?= $t['tanggal'] ?></td>
+                    <td class="px-4 py-2">Rp <?= number_format($t['total_all'], 0, ',', '.') ?></td>
+                    <td class="px-4 py-2"><?= $t['status'] == 1 ? 'Diproses' : 'Selesai' ?></td>
                 </tr>
                 <?php endforeach; ?>
                     

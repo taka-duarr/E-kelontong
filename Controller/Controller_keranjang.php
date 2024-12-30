@@ -21,10 +21,14 @@ class ControllerKeranjang {
         // print_r($_GET);
         // echo '</pre>';
         // die();
-
+            $cart_items = $_SESSION['cart'];
             $id_user = $_SESSION['user']['id'] ?? null;
             $id_barang = $_POST['id_barang'] ?? null;
             $jumlah = $_POST['jumlah'] ?? 1;
+
+            if (!isset($_SESSION['cart'])) {
+                $_SESSION['cart'] = [];
+            }
 
             $result = $this->ModelKeranjang->createKeranjang($id_user, $id_barang, $jumlah);
 

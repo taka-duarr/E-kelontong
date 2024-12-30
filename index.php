@@ -155,8 +155,9 @@
                 $controller->listTransaksi();
                 break;
             case 'add':
-                $controller->checkout($_SESSION['user']['id'], $_SESSION['cart']);
-                    break;
+                 // Contoh total harga dari POST
+            $controller->checkout($_SESSION['user']['id'], $cart_items);
+            break;
         }
     }else{
         echo "Modul tidak ditemukan!";

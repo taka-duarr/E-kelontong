@@ -1,66 +1,50 @@
-<?php
+    <?php
 
-require_once 'Model/Model_transaksi.php';
+    require_once 'Model/Model_transaksi.php';
 
-class TransaksiController {
-    private $Model_transaksi;
 
-    public function __construct() {
-        $this->Model_transaksi = new ModelTransaksi();
-    }
 
-    // Proses checkout
-    public function checkout($id_user, $cartItems) {
-        $_SESSION['user']['id'] = $id_user;
+    class TransaksiController {
+        private $model;
     
-        if (empty($cartItems) || !is_array($cartItems)) {
-            die("Keranjang kosong. Tidak ada barang untuk diproses.");
+        public function __construct() {
+            $this->model = new ModelTransaksi();
         }
     
-        $total_harga = 0;
-        $details = [];  // Pastikan $details selalu diinisialisasi sebagai array
+        public function checkout($id_user, $cart_items) {
+            $total_harga = 0;
+            foreach ($cart_items as $item) {
+                $total_harga += $item['harga'] * $item['jumlah'];
+            }
     
-        // Hitung total harga dan siapkan detail transaksi
-        foreach ($cartItems as $item) {
-            // Periksa apakah 'harga_barang' ada dalam item
-            $harga_barang = isset($item['harga_barang']) ? $item['harga_barang'] : 0; // Gunakan 0 jika tidak ada harga
+            // Simpan transaksi utama
+            $status = 1; // Status transaksi 'Diproses'
+            $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status);
     
-            $details[] = [
-                'id_barang' => $item['id_barang'],
-                'jumlah' => $item['jumlah'],
-                'harga_barang' => $harga_barang // Gunakan harga_barang yang sudah diperiksa
-            ];
+            if ($id_transaksi) {
+                // Simpan detail transaksi
+                foreach ($cart_items as $item) {
+                    $id_barang = $item['id_barang'];
+                    $jumlah = $item['jumlah'];
+                    $total_harga_item = $item['harga'] * $jumlah;
+                    $this->model->saveDetailTransaksi($id_transaksi, $id_barang, $jumlah, $total_harga_item);
+                }
     
-            $subtotal = $item['jumlah'] * $harga_barang;  // Gunakan harga_barang
-            $total_harga += $subtotal;
+                // Setelah transaksi disimpan, arahkan pengguna ke halaman transaksi list
+                header("Location: index.php?modul=transaksi&fitur=list");
+                exit;
+            } else {
+                echo "Gagal menyimpan transaksi!";
+            }
+    
         }
-    
-        // Simpan transaksi utama
-        $id_transaksi = $this->Model_transaksi->saveTransaksi($id_user, $total_harga, 1);
-    
-        // Simpan detail transaksi
-        $transaction = $this->Model_transaksi->saveDetailTransaksi($id_transaksi, $details);
-    
-        return $id_transaksi;
-    }
-    
-    
-
-
-    // Menampilkan transaksi dan detail
-    public function listTransaksi() {
-        $id_transaksi = $_GET['id_transaksi'] ?? null;
-        $transaction = $this->Model_transaksi->getTransaction($id_transaksi);
-        $details = $this->Model_transaksi->getTransactionDetails($id_transaksi);
-
-        if (!is_array($details)) {
-            $details = [];  // Jika bukan array, set menjadi array kosong
+        public function listTransaksi() {
+            $id_user = $_SESSION['user']['id'];
+            $transaksi = $this->model->getListTransaksi($id_user);
+            include 'Views/customer/invoice.php';
         }
 
-        include 'Views/customer/invoice.php';
-
-       
-    }
-
-    
+        
 }
+    ?>
+

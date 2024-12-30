@@ -31,6 +31,7 @@
         foreach ($Carts as $item) { 
             $subtotal = $item['jumlah'] * $item['harga_barang']; // Subtotal per item
             $total += $subtotal; // Tambahkan ke total keseluruhan
+            $_SESSION['total'] = $total;
         ?>
         <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
           <img src="imgBarang/<?php echo htmlspecialchars($item['gambar_barang']); ?>" alt="product-image" class="w-full rounded-lg sm:w-40" />
