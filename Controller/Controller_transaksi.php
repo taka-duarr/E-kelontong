@@ -27,6 +27,8 @@
 // echo '</pre>';
 // die();
 
+
+
         
        
 
@@ -40,10 +42,11 @@
         // Menyimpan transaksi baru
         $status = 'pending'; // Status bisa disesuaikan sesuai kebutuhan
         $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status);
+       
 
         if ($id_transaksi) {
             // Menyimpan detail transaksi
-            foreach ($cart_items as $item) {
+            foreach ($uniqueData as $item) {
                 $this->model->saveDetailTransaksi($id_transaksi, $item['id_barang'], $item['jumlah'], $item['jumlah'] * $item['jumlah']);
             }
 
@@ -56,6 +59,7 @@
             // Jika ada kesalahan saat membuat transaksi
             echo "Gagal melakukan transaksi.";
         }
+     
     }
         public function listTransaksi() {
             $id_user = $_SESSION['user']['id'];

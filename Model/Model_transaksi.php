@@ -33,6 +33,7 @@ class ModelTransaksi {
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iii", $id_transaksi, $id_barang, $total_harga_item);
         return $stmt->execute();
+     
     }
 
     // Menghapus item dari keranjang setelah checkout
