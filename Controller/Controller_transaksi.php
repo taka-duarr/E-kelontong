@@ -13,14 +13,28 @@
     
         public function checkout($id_user, $cart_items) {
         $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+        $filteredData = array_filter($cart_items, function ($item) {
+            return !empty($item['id_barang']) && !empty($item['jumlah']) && isset($item['harga_barang']);
+        });
+        
+        // Fungsi untuk menghilangkan elemen duplikat
+        $uniqueData = array_values(array_unique($filteredData, SORT_REGULAR));
+        
+        // Output hasil
+        print_r($uniqueData);
+//         echo '<pre>';
+// print_r($cart_items);
+// echo '</pre>';
+// die();
+
         
        
 
 
         // Menghitung total harga dari keranjang
         $total_harga = 0;
-        foreach ($cart_items as $item) {
-            $total_harga += $item['jumlah'] * $item['jumlah'];
+        foreach ($uniqueData as $item) {
+            $total_harga += $item['jumlah'] * $item['harga_barang'];
         }
 
         // Menyimpan transaksi baru

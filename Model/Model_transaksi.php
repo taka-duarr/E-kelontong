@@ -28,10 +28,10 @@ class ModelTransaksi {
     }
 
     // Menyimpan detail transaksi
-    public function saveDetailTransaksi($id_transaksi, $id_barang, $jumlah, $total_harga_item) {
-        $query = "INSERT INTO db_detail_transaksi (id_transaksi, id_barang, jumlah, total_harga) VALUES (?, ?, ?, ?)";
+    public function saveDetailTransaksi($id_transaksi, $id_barang, $total_harga_item) {
+        $query = "INSERT INTO db_detail_transaksi (id_transaksi, id_barang, total_harga) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("iiii", $id_transaksi, $id_barang, $jumlah, $total_harga_item);
+        $stmt->bind_param("iii", $id_transaksi, $id_barang, $total_harga_item);
         return $stmt->execute();
     }
 

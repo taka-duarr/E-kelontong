@@ -157,7 +157,7 @@
                 break;
             case 'add':
                  // Contoh total harga dari POST
-            $controller->checkout($_SESSION['user']['id'], $cart_items);
+            $controller->checkout($_SESSION['user']['id'], $_SESSION['cart']);
             break;
         }
     }else{

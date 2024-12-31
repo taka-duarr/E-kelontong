@@ -23,7 +23,7 @@ class ControllerKeranjang {
         // die();
 
         foreach ($Carts as $item) {
-            $_SESSION['cart'][] = [
+            $_SESSION['cart'] = [
                 'id_barang' => $item['id_barang'],  // Pastikan kolom ini ada dalam data Carts
                 'jumlah' => $item['jumlah'],        // Pastikan kolom ini ada dalam data Carts
                 'harga_barang' => $item['harga_barang']    // Pastikan kolom ini ada dalam data Carts
