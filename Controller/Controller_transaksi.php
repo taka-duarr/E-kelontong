@@ -55,6 +55,7 @@
 
             // Redirect atau beri feedback setelah transaksi berhasil
             echo "Transaksi berhasil dilakukan, ID Transaksi: " . $id_transaksi;
+            header("Location: index.php?modul=transaksi&fitur=list");
         } else {
             // Jika ada kesalahan saat membuat transaksi
             echo "Gagal melakukan transaksi.";

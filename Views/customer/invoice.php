@@ -1,6 +1,6 @@
-<pre>
+<!-- <pre>
 <?php print_r($transaksi); ?>
-</pre>
+</pre> -->
 
 <!DOCTYPE html>
 <html lang="en">
