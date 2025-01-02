@@ -27,12 +27,6 @@
 // echo '</pre>';
 // die();
 
-
-
-        
-       
-
-
         // Menghitung total harga dari keranjang
         $total_harga = 0;
         foreach ($uniqueData as $item) {
@@ -47,11 +41,18 @@
         if ($id_transaksi) {
             // Menyimpan detail transaksi
             foreach ($uniqueData as $item) {
-                $this->model->saveDetailTransaksi($id_transaksi, $item['id_barang'], $item['jumlah'], $item['jumlah'] * $item['jumlah']);
+                $this->model->saveDetailTransaksi($id_transaksi, $item['id_barang'], $item['jumlah'] * $item['harga_barang']);
+
             }
 
-            // Menghapus data keranjang setelah checkout
-            // $model->deleteCartItems($id_user);
+            // if (!$this->model->deleteDetailTransaksi($id_user)) {
+                
+            //     die("Gagal menghapus detail transaksi.");
+            // }
+
+            if (!$this->model->deleteCartItems($id_user)) {
+                die("Gagal menghapus keranjang.");
+            }
 
             // Redirect atau beri feedback setelah transaksi berhasil
             echo "Transaksi berhasil dilakukan, ID Transaksi: " . $id_transaksi;
@@ -67,6 +68,10 @@
             $transaksi = $this->model->getListTransaksi($id_user);
             include 'Views/customer/invoice.php';
         }
+
+
+
+        
 
         
 }

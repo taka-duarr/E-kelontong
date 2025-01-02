@@ -62,6 +62,10 @@
                 <i class="fa fa-fw fa-cart-arrow-down text-dark ms-3"></i>
                 
             </a>
+            <a href="index.php?modul=transaksi&fitur=list" class="nav-icon position-relative text-decoration-none" >
+            <i class="fa-solid fa-money-bill text-dark ms-3"></i>
+                
+            </a>
         </div>
     </div>
 </div>
@@ -108,6 +112,7 @@
                                 <button type="submit" class="btn btn-dark">
                                     <i class="fa fa-fw fa-cart-arrow-down text-light me-2"></i>Keranjang
                                 </button>
+                                
                             </form>
                         </div>
 

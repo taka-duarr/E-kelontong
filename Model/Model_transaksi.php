@@ -29,20 +29,21 @@ class ModelTransaksi {
 
     // Menyimpan detail transaksi
     public function saveDetailTransaksi($id_transaksi, $id_barang, $total_harga_item) {
+        $queryCheck = "SELECT COUNT(*) as count FROM db_cart WHERE id_barang = ?";
+    $stmtCheck = $this->db->prepare($queryCheck);
+    $stmtCheck->bind_param("i", $id_barang);
+    $stmtCheck->execute();
+    $resultCheck = $stmtCheck->get_result()->fetch_assoc();
+
+    if ($resultCheck['count'] === 0) {
+        die("Error: id_barang tidak valid atau tidak ditemukan di db_cart.");
+    }
         $query = "INSERT INTO db_detail_transaksi (id_transaksi, id_barang, total_harga) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iii", $id_transaksi, $id_barang, $total_harga_item);
         return $stmt->execute();
      
     }
-
-    // Menghapus item dari keranjang setelah checkout
-    // public function deleteCartItems($id_user) {
-    //     $query = "DELETE FROM db_cart WHERE id_user = ?";
-    //     $stmt = $this->db->prepare($query);
-    //     $stmt->bind_param("i", $id_user);
-    //     return $stmt->execute();
-    // }
 
 
     public function getListTransaksi($id_user) {
@@ -77,6 +78,25 @@ class ModelTransaksi {
         }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function deleteCartItems($id_user) {
+        $query = "DELETE FROM db_cart WHERE id_user = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_user);
+        return $stmt->execute();
+    }
+    public function deleteDetailTransaksi($id_user) {
+        $query = "
+            DELETE d
+            FROM db_detail_transaksi d
+            JOIN db_transaksi t ON d.id_transaksi = t.id_transaksi
+            WHERE t.id_user = ?
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_user);
+        return $stmt->execute();
+    }
+    
     
     
     
@@ -84,8 +104,5 @@ class ModelTransaksi {
     
 
 }
-
-
-
 
 ?>

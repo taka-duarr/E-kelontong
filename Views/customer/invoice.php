@@ -64,11 +64,11 @@
             </div>
 
             <div class="mt-8 flex justify-center">
-                <a href="/" class="px-6 py-3 text-white bg-black rounded-lg hover:bg-gray-800 transition duration-300">
+                <a href="index.php?modul=cust&fitur=shop" class="px-6 py-3 text-white bg-black rounded-lg hover:bg-gray-800 transition duration-300">
                     Kembali ke Beranda
                 </a>
             </div>
         </div>
-    </div>
+    </div>  
 </body>
 </html>
