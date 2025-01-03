@@ -22,21 +22,21 @@ class ControllerKeranjang {
         // echo '</pre>';
         // die();
 
-        foreach ($Carts as $item) {
-            $_SESSION['cart'] = [
-                'id_barang' => $item['id_barang'],  // Pastikan kolom ini ada dalam data Carts
-                'jumlah' => $item['jumlah'],        // Pastikan kolom ini ada dalam data Carts
-                'harga_barang' => $item['harga_barang']    // Pastikan kolom ini ada dalam data Carts
-            ];
-        }
-            $cart_items = $_SESSION['cart'];
+        // foreach ($Carts as $item) {
+        //     $_SESSION['cart'] = [
+        //         'id_barang' => $item['id_barang'],  // Pastikan kolom ini ada dalam data Carts
+        //         'jumlah' => $item['jumlah'],        // Pastikan kolom ini ada dalam data Carts
+        //         'harga_barang' => $item['harga_barang']    // Pastikan kolom ini ada dalam data Carts
+        //     ];
+        // }
+            // $cart_items = $_SESSION['cart'];
             $id_user = $_SESSION['user']['id'] ?? null;
             $id_barang = $_POST['id_barang'] ?? null;
             $jumlah = $_POST['jumlah'] ?? 1;
 
-            if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = [];
-            }
+            // if (!isset($_SESSION['cart'])) {
+            //     $_SESSION['cart'] = [];
+            // }
 
             $result = $this->ModelKeranjang->createKeranjang($id_user, $id_barang, $jumlah);
 
@@ -47,7 +47,8 @@ class ControllerKeranjang {
                 echo "Error adding to cart.";
             }
         }
-    }
+    
+}
 
     
         public function listKeranjang() {
@@ -94,6 +95,7 @@ class ControllerKeranjang {
             }
         }
     }
+
     
     
 }

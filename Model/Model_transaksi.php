@@ -45,10 +45,60 @@ class ModelTransaksi {
      
     }
 
+    public function getCartItemsByUser($id_user) {
+        $query = "
+            SELECT 
+                c.id_barang, 
+                c.jumlah, 
+                b.harga_barang
+            FROM db_cart c
+            JOIN db_barang b ON c.id_barang = b.id_barang
+            WHERE c.id_user = ?
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt) {
+            die("Query Error: " . $this->db->error); // Debug error kueri
+        }
+        $stmt->bind_param("i", $id_user);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC); // Mengembalikan array data keranjang
+    }
+    
 
     public function getListTransaksi($id_user) {
         $query = "
             SELECT 
+                t.id_transaksi, 
+                t.tanggal, 
+                t.total_harga AS total_all, 
+                t.status, 
+                d.id_barang,
+                d.total_harga,
+                b.nama_barang, 
+                b.harga_barang 
+            FROM db_transaksi t
+            JOIN db_detail_transaksi d ON t.id_transaksi = d.id_transaksi
+            JOIN db_barang b ON d.id_barang = b.id_barang
+            WHERE t.id_user = ?
+        ";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_user);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
+    }
+    
+    
+
+    public function getListTransaksii($id_user) {
+        $query = " SELECT 
                 t.id_transaksi, 
                 t.tanggal, 
                 t.total_harga AS total_all, 
@@ -67,15 +117,15 @@ class ModelTransaksi {
             ORDER BY t.tanggal DESC
         ";
         $stmt = $this->db->prepare($query);
-        if (!$stmt) {
-            die("Query Error: " . $this->db->error); // Debug error kueri
-        }
+        // if (!$stmt) {
+        //     die("Query Error: " . $this->db->error); // Debug error kueri
+        // }
         $stmt->bind_param("i", $id_user);
         $stmt->execute();
         $result = $stmt->get_result();
-        if ($result->num_rows === 0) {
-            die("No data found for id_user: $id_user");
-        }
+        // if ($result->num_rows === 0) {
+        //     die("No data found for id_user: $id_user");
+        // }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 

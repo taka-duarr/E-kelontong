@@ -1,6 +1,9 @@
-<!-- <pre>
-<?php print_r($transaksi); ?>
-</pre> -->
+    <pre>
+    <?php print_r($groupedTransaksi); ?>
+    </pre>
+    <pre>
+    <?php print_r($transaksi); ?>
+    </pre>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,8 +50,8 @@
 
             <div class="mt-6 border-t border-gray-200 pt-4">
                 <div class="flex justify-between text-black">
-                <?php foreach ($transaksi as $t): ?>
-                <tr class="border-b">
+                <?php foreach ($groupedTransaksi as $t): ?>
+                    <tr class="border-b">
                     <td class="px-4 py-2"><?= $t['tanggal'] ?></td>
                     <td class="px-4 py-2">Rp <?= number_format($t['total_all'], 0, ',', '.') ?></td>
                     <td class="px-4 py-2"><?= $t['status'] == 1 ? 'Diproses' : 'Selesai' ?></td>
