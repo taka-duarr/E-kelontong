@@ -10,33 +10,9 @@ class ControllerKeranjang {
 
     public function addKeranjang() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        //     echo '<pre>';
-        // print_r($_POST); // Debug data POST
-        // echo '</pre>';
-
-
-        // echo '<pre>';
-        // print_r($_SERVER);
-        // print_r($_POST);
-        // print_r($_GET);
-        // echo '</pre>';
-        // die();
-
-        // foreach ($Carts as $item) {
-        //     $_SESSION['cart'] = [
-        //         'id_barang' => $item['id_barang'],  // Pastikan kolom ini ada dalam data Carts
-        //         'jumlah' => $item['jumlah'],        // Pastikan kolom ini ada dalam data Carts
-        //         'harga_barang' => $item['harga_barang']    // Pastikan kolom ini ada dalam data Carts
-        //     ];
-        // }
-            // $cart_items = $_SESSION['cart'];
             $id_user = $_SESSION['user']['id'] ?? null;
             $id_barang = $_POST['id_barang'] ?? null;
             $jumlah = $_POST['jumlah'] ?? 1;
-
-            // if (!isset($_SESSION['cart'])) {
-            //     $_SESSION['cart'] = [];
-            // }
 
             $result = $this->ModelKeranjang->createKeranjang($id_user, $id_barang, $jumlah);
 

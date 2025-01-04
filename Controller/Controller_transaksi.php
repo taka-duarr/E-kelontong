@@ -1,9 +1,5 @@
     <?php
-
     require_once 'Model/Model_transaksi.php';
-
-
-
     class TransaksiController {
         private $model;
     
@@ -11,63 +7,9 @@
             $this->model = new ModelTransaksi();
         }
     
-//         public function checkout($id_user, $cart_items) {
-//         $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-//         // $filteredData = array_filter($cart_items, function ($item) {
-//         //     return !empty($item['id_barang']) && !empty($item['jumlah']) && isset($item['harga_barang']);
-//         // });
-        
-//         // // Fungsi untuk menghilangkan elemen duplikat
-//         // $uniqueData = array_values(array_unique($filteredData, SORT_REGULAR));
-        
-//         // // Output hasil
-//         // print_r($uniqueData);
-//          echo '<pre>';
-//         print_r($cart_items);
-//         echo '</pre>';
-// die();   
-
-//         // Menghitung total harga dari keranjang
-//         $total_harga = 0;
-//         foreach ($uniqueData as $item) {
-//             $total_harga += $item['jumlah'] * $item['harga_barang'];
-//         }
-
-//         // Menyimpan transaksi baru
-//         $status = 'pending'; // Status bisa disesuaikan sesuai kebutuhan
-//         $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status);
-       
-
-//         if ($id_transaksi) {
-//             // Menyimpan detail transaksi
-//             foreach ($uniqueData as $item) {
-//                 $this->model->saveDetailTransaksi($id_transaksi, $item['id_barang'], $item['jumlah'] * $item['harga_barang']);
-
-//             }
-
-//             // if (!$this->model->deleteDetailTransaksi($id_user)) {
-                
-//             //     die("Gagal menghapus detail transaksi.");
-//             // }
-
-//             // if (!$this->model->deleteCartItems($id_user)) {
-//             //     die("Gagal menghapus keranjang.");
-//             // }
-
-//             // Redirect atau beri feedback setelah transaksi berhasil
-//             echo "Transaksi berhasil dilakukan, ID Transaksi: " . $id_transaksi;
-//             header("Location: index.php?modul=transaksi&fitur=list");
-//         } else {
-//             // Jika ada kesalahan saat membuat transaksi
-//             echo "Gagal melakukan transaksi.";
-//         }
-
-//         unset($_SESSION['cart']);
-     
-//     }
-
 public function checkout($id_user) {
     $cart_items = $this->model->getCartItemsByUser($id_user);
+    $alamat = $_POST['alamat'] ?? 'nuuh';
 
     if (empty($cart_items)) {
         die("Keranjang kosong. Tidak ada transaksi yang dapat dilakukan.");
@@ -82,7 +24,7 @@ public function checkout($id_user) {
     }
 
     $status = 'pending';
-    $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status);
+    $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status, $alamat);
 
     if ($id_transaksi) {
         foreach ($cart_items as $item) {
@@ -117,6 +59,7 @@ public function checkout($id_user) {
                     "id_transaksi" => $item["id_transaksi"],
                     "tanggal" => $item["tanggal"],
                     "total_all" => $item["total_all"],
+                    "alamat" => $item["alamat"],
                     "status" => $item["status"],
                     "items" => [] // Selalu inisialisasi items sebagai array kosong
                 ];
@@ -140,13 +83,6 @@ public function checkout($id_user) {
         // Kirim data ke view
         include 'Views/customer/invoice.php';
     }
-
-    
-    
-
-
-
-        
 
         
 }

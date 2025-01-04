@@ -150,14 +150,13 @@
         }
     }elseif($modul === 'transaksi'){
         $controller = new TransaksiController();
-        $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
         switch ($fitur) {
             case 'list':
                 $controller->listTransaksi();
                 break;
             case 'add':
                  // Contoh total harga dari POST
-            $controller->checkout($_SESSION['user']['id'], $_SESSION['cart']);
+            $controller->checkout($_SESSION['user']['id']);
             break;
         }
     }else{

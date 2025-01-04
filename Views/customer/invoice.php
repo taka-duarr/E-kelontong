@@ -21,6 +21,7 @@
                         <p class="text-sm text-gray-600">
                             Tanggal: <?= htmlspecialchars($transaksi['tanggal']) ?> | 
                             Total Harga: Rp <?= number_format($transaksi['total_all'], 0, ',', '.') ?> | 
+                            Alamat: <?= htmlspecialchars($transaksi['alamat']) ?> |
                             Status: <?= $transaksi['status'] == 1 ? 'Diproses' : 'Selesai' ?>
                         </p>
                     </div>

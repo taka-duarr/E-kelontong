@@ -76,8 +76,23 @@
         <?php } ?>
       </div>
 
+      
+
       <!-- Subtotal -->
       <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+      <form method="POST" action="index.php?modul=transaksi&fitur=checkout">
+    <div class="mt-4">
+        <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat Pengiriman</label>
+        <textarea 
+            id="alamat" 
+            name="alamat" 
+            rows="4" 
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm" 
+            placeholder="Masukkan alamat lengkap Anda" 
+            required></textarea>
+    </div>
+</form>
+  
         <div class="mb-2 flex justify-between">
           <p class="text-gray-700">Subtotal</p>
           <p class="text-gray-700">Rp <?php echo number_format($total); ?></p> <!-- Menampilkan total keseluruhan -->
