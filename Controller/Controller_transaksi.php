@@ -66,45 +66,41 @@
      
 //     }
 
-    public function checkout($id_user) {
-        // Ambil data keranjang dari database
-        $cart_items = $this->model->getCartItemsByUser($id_user);
-        
-        // Validasi jika keranjang kosong
-        if (empty($cart_items)) {
-            die("Keranjang kosong. Tidak ada transaksi yang dapat dilakukan.");
-        }
+public function checkout($id_user) {
+    $cart_items = $this->model->getCartItemsByUser($id_user);
 
-        // Hitung total harga
-        $total_harga = 0;
-        foreach ($cart_items as $item) {
-            $total_harga += $item['jumlah'] * $item['harga_barang'];
-        }
-
-        // Simpan transaksi utama
-        $status = 'pending'; // Status bisa disesuaikan
-        $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status);
-
-        if ($id_transaksi) {
-            // Simpan detail transaksi
-            foreach ($cart_items as $item) {
-                $total_harga_item = $item['jumlah'] * $item['harga_barang'];
-                $this->model->saveDetailTransaksi($id_transaksi, $item['id_barang'], $total_harga_item);
-            }
-
-            // Hapus data keranjang setelah transaksi selesai
-            if (!$this->model->deleteCartItems($id_user)) {
-                die("Gagal menghapus keranjang setelah checkout.");
-            }
-
-            // Redirect atau tampilkan pesan sukses
-            echo "Transaksi berhasil dilakukan, ID Transaksi: " . $id_transaksi;
-            header("Location: index.php?modul=transaksi&fitur=list");
-            exit;
-        } else {
-            die("Gagal menyimpan transaksi.");
-        }
+    if (empty($cart_items)) {
+        die("Keranjang kosong. Tidak ada transaksi yang dapat dilakukan.");
     }
+
+    $total_harga = 0;
+    foreach ($cart_items as $item) {
+        if (!isset($item['jumlah'], $item['harga_barang'])) {
+            die("Data item tidak lengkap: " . json_encode($item));
+        }
+        $total_harga += $item['jumlah'] * $item['harga_barang'];
+    }
+
+    $status = 'pending';
+    $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status);
+
+    if ($id_transaksi) {
+        foreach ($cart_items as $item) {
+            $total_harga_item = $item['jumlah'] * $item['harga_barang'];
+            $this->model->saveDetailTransaksi($id_transaksi, $item['id_barang'], $item['jumlah'], $total_harga_item);
+        }
+
+        if (!$this->model->deleteCartItems($id_user)) {
+            die("Gagal menghapus keranjang setelah checkout.");
+        }
+
+        echo "Transaksi berhasil dilakukan, ID Transaksi: " . $id_transaksi;
+        header("Location: index.php?modul=transaksi&fitur=list");
+        exit;
+    } else {
+        die("Gagal menyimpan transaksi.");
+    }
+}
 
     public function listTransaksi() {
         $id_user = $_SESSION['user']['id'];
@@ -120,7 +116,7 @@
                 $groupedTransaksi[$id_transaksi] = [
                     "id_transaksi" => $item["id_transaksi"],
                     "tanggal" => $item["tanggal"],
-                    "total_harga" => $item["total_harga"],
+                    "total_all" => $item["total_all"],
                     "status" => $item["status"],
                     "items" => [] // Selalu inisialisasi items sebagai array kosong
                 ];
@@ -144,6 +140,8 @@
         // Kirim data ke view
         include 'Views/customer/invoice.php';
     }
+
+    
     
 
 

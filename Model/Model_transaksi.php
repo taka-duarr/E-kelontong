@@ -28,22 +28,21 @@ class ModelTransaksi {
     }
 
     // Menyimpan detail transaksi
-    public function saveDetailTransaksi($id_transaksi, $id_barang, $total_harga_item) {
-        $queryCheck = "SELECT COUNT(*) as count FROM db_cart WHERE id_barang = ?";
-    $stmtCheck = $this->db->prepare($queryCheck);
-    $stmtCheck->bind_param("i", $id_barang);
-    $stmtCheck->execute();
-    $resultCheck = $stmtCheck->get_result()->fetch_assoc();
-
-    if ($resultCheck['count'] === 0) {
-        die("Error: id_barang tidak valid atau tidak ditemukan di db_cart.");
+    public function saveDetailTransaksi($id_transaksi, $id_barang, $jumlah, $total_harga_item) {
+        $queryInsert = "
+            INSERT INTO db_detail_transaksi (id_transaksi, id_barang, jumlah, total_harga)
+            VALUES (?, ?, ?, ?)
+        ";
+        $stmtInsert = $this->db->prepare($queryInsert);
+        if (!$stmtInsert) {
+            die("Query Error: " . $this->db->error);
+        }
+    
+        $stmtInsert->bind_param("iiii", $id_transaksi, $id_barang, $jumlah, $total_harga_item);
+        return $stmtInsert->execute();
     }
-        $query = "INSERT INTO db_detail_transaksi (id_transaksi, id_barang, total_harga) VALUES (?, ?, ?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param("iii", $id_transaksi, $id_barang, $total_harga_item);
-        return $stmt->execute();
-     
-    }
+    
+    
 
     public function getCartItemsByUser($id_user) {
         $query = "
@@ -72,12 +71,14 @@ class ModelTransaksi {
                 t.id_transaksi, 
                 t.tanggal, 
                 t.total_harga AS total_all, 
-                t.status, 
+                t.status,
+                d.jumlah,
                 d.id_barang,
                 d.total_harga,
                 b.nama_barang, 
                 b.harga_barang 
             FROM db_transaksi t
+            
             JOIN db_detail_transaksi d ON t.id_transaksi = d.id_transaksi
             JOIN db_barang b ON d.id_barang = b.id_barang
             WHERE t.id_user = ?
@@ -94,40 +95,9 @@ class ModelTransaksi {
             return [];
         }
     }
-    
-    
 
-    public function getListTransaksii($id_user) {
-        $query = " SELECT 
-                t.id_transaksi, 
-                t.tanggal, 
-                t.total_harga AS total_all, 
-                t.status, 
-                d.id_barang, 
-                c.jumlah, 
-                d.total_harga, 
-                b.nama_barang, 
-                b.harga_barang, 
-                b.gambar_barang
-            FROM db_transaksi t
-            JOIN db_detail_transaksi d ON t.id_transaksi = d.id_transaksi
-            JOIN db_barang b ON d.id_barang = b.id_barang
-            JOIN db_cart c ON d.id_barang = c.id_barang
-            WHERE t.id_user = ?
-            ORDER BY t.tanggal DESC
-        ";
-        $stmt = $this->db->prepare($query);
-        // if (!$stmt) {
-        //     die("Query Error: " . $this->db->error); // Debug error kueri
-        // }
-        $stmt->bind_param("i", $id_user);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        // if ($result->num_rows === 0) {
-        //     die("No data found for id_user: $id_user");
-        // }
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
+    
+    
 
     public function deleteCartItems($id_user) {
         $query = "DELETE FROM db_cart WHERE id_user = ?";
