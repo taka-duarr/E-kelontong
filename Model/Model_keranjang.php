@@ -103,16 +103,6 @@ class ModelKeranjang {
         return $stmt->affected_rows > 0;
     }
 
-    
-    
-    public function getKeranjangByUser($id_user) {
-        $query = "SELECT * FROM keranjang WHERE id_user = ?";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param("i", $id_user);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
 
     public function clearKeranjangByUser($id_user) {
         $query = "DELETE FROM keranjang WHERE id_user = ?";

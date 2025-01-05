@@ -11,6 +11,10 @@ public function checkout($id_user) {
     $cart_items = $this->model->getCartItemsByUser($id_user);
     $alamat = $_POST['alamat'] ?? 'nuuh';
 
+    if (empty($alamat)) {
+        die("Alamat pengiriman harus diisi. Silakan kembali dan lengkapi alamat Anda.");
+    }
+
     if (empty($cart_items)) {
         die("Keranjang kosong. Tidak ada transaksi yang dapat dilakukan.");
     }

@@ -79,42 +79,34 @@
       
 
       <!-- Subtotal -->
-      <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
-      <form method="POST" action="index.php?modul=transaksi&fitur=checkout">
-    <div class="mt-4">
-        <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat Pengiriman</label>
-        <textarea 
-            id="alamat" 
-            name="alamat" 
-            rows="4" 
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm" 
-            placeholder="Masukkan alamat lengkap Anda" 
-            required></textarea>
-    </div>
-</form>
-  
-        <div class="mb-2 flex justify-between">
-          <p class="text-gray-700">Subtotal</p>
-          <p class="text-gray-700">Rp <?php echo number_format($total); ?></p> <!-- Menampilkan total keseluruhan -->
+       <!-- Subtotal -->
+<div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+    <form method="POST" action="index.php?modul=transaksi&fitur=add">
+        <div class="mt-4">
+            <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat Pengiriman</label>
+            <textarea 
+                id="alamat" 
+                name="alamat" 
+                rows="4" 
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm" 
+                placeholder="Masukkan alamat lengkap Anda" 
+                required></textarea>
         </div>
-        <hr class="my-4" />
-        <div class="flex justify-between">
-          <p class="text-lg font-bold">Total</p>
-          <div class="">
-            <p class="mb-1 text-lg font-bold">Rp <?php echo number_format($total); ?> </p> <!-- Total keseluruhan -->
-            
-          </div>
+        <input type="hidden" name="id_user" value="<?= $_SESSION['user']['id'] ?>">
+        <div class="flex justify-between mt-6">
+            <p class="text-lg font-bold">Total</p>
+            <p class="text-lg font-bold">Rp <?php echo number_format($total); ?></p>
         </div>
-        <form action="index.php?modul=transaksi&fitur=add" method="post">
-            <input type="hidden" name="id_user" value="<?= $_SESSION['user'] ?>">
-            <button type="submit" class="px-6 py-3 text-white bg-black rounded-lg hover:bg-gray-800">
-                Checkout
-            </button>
-        </form>
-      </div>
+        <button type="submit" class="px-6 py-3 mt-4 w-full text-white bg-black rounded-lg hover:bg-gray-800">
+            Checkout
+        </button>
+    </form>
+</div>
     </div>
+
+      
     
-  </div>
+  
 
   <div class="mt-10 mb-10 flex justify-center">
     <button onclick="location.href='index.php?modul=cust&fitur=shop'" 

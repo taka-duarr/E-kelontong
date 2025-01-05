@@ -36,8 +36,7 @@ class ControllerKeranjang {
             if ($id_user === null) {
                 die("ID user tidak ditemukan. Pastikan Anda sudah login.");
             }
-    
-            
+
             $Carts = $this->ModelKeranjang->getAllKeranjang($id_user['id']);
 
             // Menambahkan item ke dalam session cart
