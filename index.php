@@ -6,6 +6,7 @@
     require_once 'Controller/Controller_login.php';
     require_once 'Controller/Controller_keranjang.php';
     require_once 'Controller/Controller_transaksi.php';
+    require_once 'Controller/Controller_approve.php';
     
     // Routing berdasarkan modul dan fitur
 
@@ -159,7 +160,14 @@
             $controller->checkout($_SESSION['user']['id']);
             break;
         }
-    }else{
+    }elseif($modul === 'approve'){
+        $controller = new ApproveController();
+        switch ($fitur) {
+            case 'list':
+                $controller->listAllTransaksi();
+                break;
+    }
+}   else{
         echo "Modul tidak ditemukan!";
     }
 
