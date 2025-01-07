@@ -7,6 +7,7 @@
     require_once 'Controller/Controller_keranjang.php';
     require_once 'Controller/Controller_transaksi.php';
     require_once 'Controller/Controller_approve.php';
+    require_once 'Controller/Controller_kurir.php';
     
     // Routing berdasarkan modul dan fitur
 
@@ -176,6 +177,12 @@
 
     }
 }elseif($modul === 'kurir'){
+    $controller = new KurirController();
+    switch ($fitur) {
+        case 'list':
+            $controller->listAllTransaksi();
+            break;
+    }
 
 
 }else{

@@ -35,7 +35,7 @@ class LoginController
                     } elseif ($user['nama_role'] === 'admin') {
                         header("Location: index.php?modul=barang&fitur=list");
                     } elseif($user['nama_role'] === 'kurir') {
-                        header("Location: Views/kurir/checkout_list.php");
+                        header("Location: index.php?modul=kurir&fitur=list");
                     } else {
                         $error = "Role tidak dikenali.";
                     }

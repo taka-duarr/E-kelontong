@@ -1,72 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasbor Kurir</title>
+    <title>List Barang</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
-    <!-- Navbar -->
-    <?php include 'includes/navbar.php'; ?>
+<!-- Navbar -->
+<?php include 'includes/navbar.php'; ?>
 
-    <!-- Main Container -->
-    <div class="flex">
+<!-- Main container -->
+<div class="flex">
+    <!-- Sidebar -->
+    <?php include 'includes/sidebar.php'; ?>
 
-        <!-- Sidebar -->
-        <?php include 'includes/sidebar.php'; ?>
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+        <div class="container mx-auto">
+            <!-- Button to Insert New Barang -->
+          
 
-        <!-- Main Content -->
-        <div class="container mx-auto p-8">
-            <h1 class="text-2xl font-bold mb-4">Daftar Pesanan</h1>
-
-            <!-- Table Container -->
-            <div class="bg-white shadow-md rounded">
+            <!-- Barang Table -->
+            <div class="bg-gray-200 shadow-md rounded my-6">
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-800 text-white">
-                        <tr>
-                            <th class="py-3 px-4 uppercase font-semibold text-sm">ID </th>
-                            <th class="py-3 px-4 uppercase font-semibold text-sm">Nama Pesanan</th>
-                            <th class="py-3 px-4 uppercase font-semibold text-sm">Deskripsi</th>
-                            <th class="py-3 px-4 uppercase font-semibold text-sm">Status</th>
-                            <th class="py-3 px-4 uppercase font-semibold text-sm">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-700">
-                        <!-- Data Dummy -->
-                        <tr>
-                            <td class="py-3 px-4">1</td>
-                            <td class="py-3 px-4">Sabun</td>
-                            <td class="py-3 px-4">Yang aman ya</td>
-                            <td class="py-3 px-4">Belum diantar</td>
-                            <td class="py-3 px-4">
-                                <!-- Tombol "Sedang Diantar" -->
-                                <form method="POST" action="update_order_status.php" class="inline-block">
-                                    <input type="hidden" name="order_id" value="1">
-                                    <input type="hidden" name="status" value="on-delivery">
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
-                                        Sedang Diantar
-                                    </button>
-                                </form>
-                                <!-- Tombol "Telah Sampai" -->
-                                <form method="POST" action="update_order_status.php" class="inline-block ml-2">
-                                    <input type="hidden" name="order_id" value="1">
-                                    <input type="hidden" name="status" value="delivered">
-                                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">
-                                        Telah Sampai
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        
+                    <?php foreach ($groupedTransaksi as $transaksi): ?>
+            <div class=" bg-gray-200 border rounded p-5 mb-5 shadow">
+                <h2 class="text-xl font-bold">Transaction ID: <?= $transaksi['id_transaksi'] ?></h2>
+                <p><strong>Date:</strong> <?= $transaksi['tanggal'] ?></p>
+                <p><strong>Total:</strong> Rp <?= number_format($transaksi['total_all'], 0, ',', '.') ?></p>
+                <p><strong>Address:</strong> <?= $transaksi['alamat'] ?></p>
+                <p><strong>Status:</strong> <?= ucfirst($transaksi['status'] ? 'disetujui' : ' belum disetujui') ?></p>
+                <p><strong>kurir :</strong> <?= $transaksi['nama_kurir'] ?  : 'belum disetujui'  ?></p>
+                <p><strong>ongkir :</strong> <?= $transaksi['ongkir'] ?></p>
+                <p><strong>total setelah ongkir :</strong> <?= $transaksi['total_afterongkir']  ?></p>
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded mr-2">
+                    <a href="index.php?modul=approve&fitur=edit&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>">Update</a>
+                </button>
+                
+                <?php if (!empty($transaksi['items'])): ?>
+                    <table class=" table-auto border-collapse w-full mt-5">
+                        <thead class="bg-black text-white">
+                            <tr>
+                                <th class="border px-4 py-2">Item Name</th>
+                                <th class="border px-4 py-2">Quantity</th>
+                                <th class="border px-4 py-2">Price</th>
+                                <th class="border px-4 py-2">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($transaksi['items'] as $item): ?>
+                                <tr>
+                                    <td class="border px-4 py-2"><?= $item['nama_barang'] ?></td>
+                                    <td class="border px-4 py-2"><?= $item['jumlah'] ?></td>
+                                    <td class="border px-4 py-2">Rp <?= number_format($item['harga_barang'], 0, ',', '.') ?></td>
+                                    <td class="border px-4 py-2">Rp <?= number_format($item['total_harga'], 0, ',', '.') ?></td>
+                                    
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <p class="text-red-500">No items found for this transaction.</p>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-</body>
+</div>
 
+</body>
 </html>
