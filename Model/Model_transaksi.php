@@ -73,13 +73,15 @@ class ModelTransaksi {
                 t.total_harga AS total_all, 
                 t.status,
                 t.alamat,
+                t.nama_kurir,
+                t.ongkir,
+                t.total_afterongkir,
                 d.jumlah,
                 d.id_barang,
                 d.total_harga,
                 b.nama_barang, 
                 b.harga_barang 
             FROM db_transaksi t
-            
             JOIN db_detail_transaksi d ON t.id_transaksi = d.id_transaksi
             JOIN db_barang b ON d.id_barang = b.id_barang
             WHERE t.id_user = ?

@@ -65,6 +65,9 @@ public function checkout($id_user) {
                     "total_all" => $item["total_all"],
                     "alamat" => $item["alamat"],
                     "status" => $item["status"],
+                    "nama_kurir" => $item["nama_kurir"],
+                    "ongkir" => $item["ongkir"],
+                    "total_afterongkir" => $item["total_afterongkir"],
                     "items" => [] // Selalu inisialisasi items sebagai array kosong
                 ];
             }

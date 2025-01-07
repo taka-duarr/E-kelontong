@@ -1,3 +1,8 @@
+<!-- <?php
+echo '<pre>';
+var_dump($transaksi);
+echo '</pre>';
+?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +27,10 @@
                             Tanggal: <?= htmlspecialchars($transaksi['tanggal']) ?> | 
                             Total Harga: Rp <?= number_format($transaksi['total_all'], 0, ',', '.') ?> | 
                             Alamat: <?= htmlspecialchars($transaksi['alamat']) ?> |
-                            Status: <?= $transaksi['status'] == 1 ? 'Diproses' : 'Selesai' ?>
+                            Status: <?= $transaksi['status'] ? 'sedang dikirim' : 'menunggu persetujuan' ?> |
+                            nama kurir : <?= $transaksi['nama_kurir'] ? : 'menunggu persetujuan' ?> |
+                            ongkir : <?= $transaksi['ongkir'] ? : 'menunggu persetujuan' ?> |
+                            harga setelah ongkir : <?= $transaksi['total_afterongkir'] ? : 'menunggu persetujuan' ?> 
                         </p>
                     </div>
 

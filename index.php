@@ -10,8 +10,8 @@
     
     // Routing berdasarkan modul dan fitur
 
-    $modul = $_GET['modul'] ?? 'barang';
-    $fitur = $_GET['fitur'] ?? 'list';
+    $modul = $_GET['modul'] ?? 'login';
+    $fitur = $_GET['fitur'] ?? 'login';
 
     if (!isset($_SESSION['user']) && ($_GET['modul'] ?? '') !== 'login') {
         header('Location: index.php?modul=login&fitur=login');
@@ -166,8 +166,19 @@
             case 'list':
                 $controller->listAllTransaksi();
                 break;
+            case 'update':
+                $controller->update();
+                break;
+
+            case 'edit':
+                $controller->edit($_GET['id_transaksi']);
+                break;
+
     }
-}   else{
+}elseif($modul === 'kurir'){
+
+
+}else{
         echo "Modul tidak ditemukan!";
     }
 

@@ -13,15 +13,17 @@
 
             <!-- Bagian Profil dan Navigasi -->
             <div class="flex items-center space-x-4">
-                <div class="relative">
-                    <!-- Profil dengan Hover -->
-                    <img src="views/includes/pict/gambar.jpg" alt="Profil" class="w-10 h-10 rounded-full border-2 border-blue-600 transition-transform transform hover:scale-105 shadow-sm">
+                <!-- Informasi Pengguna -->
+                <div class="flex flex-col text-right">
+                    <span class="text-gray-800 font-semibold">
+                        <?= $_SESSION['user']['username'] ?? 'Username'; ?>
+                    </span>
+                    <span class="text-gray-500 text-sm">
+                        <?= $_SESSION['user']['role'] ?? 'Role'; ?>
+                    </span>
                 </div>
-                <!-- <span class="text-gray-800 cursor-pointer hover:text-blue-600 transition duration-200 font-medium"><?= $_SESSION['username_login']->username ?></span> -->
-                <!-- <span class="text-gray-500 font-medium"><?= $_SESSION['username_login']->role->nama_peran ?></span> -->
 
-                <!-- Tombol Logout tanpa simbol -->
-                <a href="index.php?modul=logout">
+                <a href="index.php?modul=login&fitur=logout">
                     <button class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-6 rounded-full transition duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
                         Logout
                     </button>

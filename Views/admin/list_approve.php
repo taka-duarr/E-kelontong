@@ -32,7 +32,13 @@
                 <p><strong>Date:</strong> <?= $transaksi['tanggal'] ?></p>
                 <p><strong>Total:</strong> Rp <?= number_format($transaksi['total_all'], 0, ',', '.') ?></p>
                 <p><strong>Address:</strong> <?= $transaksi['alamat'] ?></p>
-                <p><strong>Status:</strong> <?= ucfirst($transaksi['status'] ? 'belum disetujui' : 'disetujui') ?></p>
+                <p><strong>Status:</strong> <?= ucfirst($transaksi['status'] ? 'disetujui' : ' belum disetujui') ?></p>
+                <p><strong>kurir :</strong> <?= $transaksi['nama_kurir'] ?  : 'belum disetujui'  ?></p>
+                <p><strong>ongkir :</strong> <?= $transaksi['ongkir'] ?></p>
+                <p><strong>total setelah ongkir :</strong> <?= $transaksi['total_afterongkir']  ?></p>
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded mr-2">
+                    <a href="index.php?modul=approve&fitur=edit&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>">Update</a>
+                </button>
                 
                 <?php if (!empty($transaksi['items'])): ?>
                     <table class=" table-auto border-collapse w-full mt-5">
@@ -51,6 +57,7 @@
                                     <td class="border px-4 py-2"><?= $item['jumlah'] ?></td>
                                     <td class="border px-4 py-2">Rp <?= number_format($item['harga_barang'], 0, ',', '.') ?></td>
                                     <td class="border px-4 py-2">Rp <?= number_format($item['total_harga'], 0, ',', '.') ?></td>
+                                    
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
