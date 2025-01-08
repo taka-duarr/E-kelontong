@@ -56,6 +56,23 @@ class ModelKurir {
     
         return $data;
     }
+
+    public function updateApprove($id_transaksi, $status) {
+        $query = "UPDATE db_transaksi SET status = ? WHERE id_transaksi = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ii', $status, $id_transaksi);
+        $stmt->execute();
+    }
+
+    public function getTransaksiById($id_transaksi) {
+        $query = "SELECT * FROM db_transaksi WHERE id_transaksi = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $id_transaksi);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        return $result->fetch_assoc();
+    }
     
 }
 ?>

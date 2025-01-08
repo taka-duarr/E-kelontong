@@ -182,6 +182,9 @@
         case 'list':
             $controller->listAllTransaksi();
             break;
+        case 'update':
+            $controller->update();
+            break;
     }
 
 

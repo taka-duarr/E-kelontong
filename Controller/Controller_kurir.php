@@ -10,12 +10,6 @@ class KurirController {
 
     public function listAllTransaksi() {
     
-        // Pastikan kurir sudah login
-        // if (!isset($_SESSION[''])) {
-        //     header("Location: index.php?modul=login");
-        //     exit;
-        // }
-    
         $nama_kurir = $_SESSION['user']['username']; // Ambil nama kurir dari session
         $transaksi = $this->model->getTransaksiByKurir($nama_kurir); // Ambil data transaksi berdasarkan nama kurir();
     
@@ -54,6 +48,15 @@ class KurirController {
         // Kirim data ke view
         include 'Views/kurir/checkout_list.php';
     }
-    
+
+    public function update() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id_transaksi = $_POST['id_transaksi'];
+            $status = $_POST['status'];
+            $this->model->updateStatusTransaksi($id_transaksi, $status);
+            header("Location: index.php?modul=kurir&fitur=list");
+            exit;
+        }
+    }
 }
 ?>
