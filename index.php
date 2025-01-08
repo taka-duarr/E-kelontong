@@ -185,6 +185,9 @@
         case 'update':
             $controller->update();
             break;
+        case 'edit':
+            $controller->edit($_GET['id_transaksi']);
+            break;
     }
 
 

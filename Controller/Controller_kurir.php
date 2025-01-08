@@ -49,11 +49,17 @@ class KurirController {
         include 'Views/kurir/checkout_list.php';
     }
 
+    public function edit($id_transaksi) {
+        $transaksi = $this->model->getTransaksiById($id_transaksi);
+
+        include 'Views/kurir/update_kurir.php';
+    }
+
     public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_transaksi = $_POST['id_transaksi'];
             $status = $_POST['status'];
-            $this->model->updateStatusTransaksi($id_transaksi, $status);
+            $this->model->updateApprove($id_transaksi, $status);
             header("Location: index.php?modul=kurir&fitur=list");
             exit;
         }

@@ -28,7 +28,7 @@ echo '</pre>';
             <!-- Form Update Barang -->
             <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
                 <h2 class="text-2xl font-bold mb-6 text-gray-800">Update Persetujuan</h2>
-                <form action="index.php?modul=approve&fitur=update" method="POST">
+                <form action="index.php?modul=kurir&fitur=update" method="POST">
                     <input type="hidden" id="id_transaksi" name="id_transaksi" value="<?php echo htmlspecialchars($transaksi['id_transaksi']); ?>">
 
                     <!-- Status Barang -->
@@ -36,8 +36,8 @@ echo '</pre>';
                         <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Status pesanan:</label>
                         <select id="status" name="status" 
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                            <option value="3" <?php echo $transaksi['status'] == 3 ? 'selected' : ''; ?>>telah selesai</option>
-                            <option value="2" <?php echo $transaksi['status'] == 2 ? 'selected' : ''; ?>>belum selesai</option>
+                            <option value="1" <?php echo $transaksi['status'] == 1 ? 'selected' : ''; ?>>belum sampai</option>
+                            <option value="2" <?php echo $transaksi['status'] == 2 ? 'selected' : ''; ?>>telah sampai</option>
                         </select>
                     </div>
 

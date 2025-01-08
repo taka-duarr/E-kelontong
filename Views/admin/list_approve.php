@@ -32,7 +32,11 @@
                 <p><strong>Date:</strong> <?= $transaksi['tanggal'] ?></p>
                 <p><strong>Total:</strong> Rp <?= number_format($transaksi['total_all'], 0, ',', '.') ?></p>
                 <p><strong>Address:</strong> <?= $transaksi['alamat'] ?></p>
-                <p><strong>Status:</strong> <?= ucfirst($transaksi['status'] ? 'disetujui' : ' belum disetujui') ?></p>
+                <p><strong>Status:</strong> 
+                    <?= $transaksi['status'] == 0 ? 'Menunggu persetujuan' : 
+                        ($transaksi['status'] == 1 ? 'sedang dikirim' : 
+                        ($transaksi['status'] == 3 ? 'telah sampai' : 'Status tidak diketahui')) ?>
+                </p>
                 <p><strong>kurir :</strong> <?= $transaksi['nama_kurir'] ?  : 'belum disetujui'  ?></p>
                 <p><strong>ongkir :</strong> <?= $transaksi['ongkir'] ?></p>
                 <p><strong>total setelah ongkir :</strong> <?= $transaksi['total_afterongkir']  ?></p>

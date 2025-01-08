@@ -27,7 +27,10 @@ echo '</pre>';
                             Tanggal: <?= htmlspecialchars($transaksi['tanggal']) ?> | 
                             Total Harga: Rp <?= number_format($transaksi['total_all'], 0, ',', '.') ?> | 
                             Alamat: <?= htmlspecialchars($transaksi['alamat']) ?> |
-                            Status: <?= $transaksi['status'] ? 'sedang dikirim' : 'menunggu persetujuan' ?> |
+                            Status: 
+                            <?= $transaksi['status'] == 0 ? 'Menunggu persetujuan' : 
+                            ($transaksi['status'] == 1 ? 'sedang dikirim' : 
+                            ($transaksi['status'] == 2 ? 'telah sampai' : 'Status tidak diketahui')) ?> |
                             nama kurir : <?= $transaksi['nama_kurir'] ? : 'menunggu persetujuan' ?> |
                             ongkir : <?= $transaksi['ongkir'] ? : 'menunggu persetujuan' ?> |
                             harga setelah ongkir : <?= $transaksi['total_afterongkir'] ? : 'menunggu persetujuan' ?> 
