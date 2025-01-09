@@ -20,7 +20,7 @@ class ModelKurir {
         // Siapkan query dengan placeholder
         $query = "
             SELECT 
-                t.id_transaksi, t.tanggal, t.total_harga AS total_all, t.alamat, t.status, t.nama_kurir, t.ongkir, t.total_afterongkir,
+                t.id_transaksi, t.tanggal, t.total_harga AS total_all, t.alamat, t.status, t.nama_kurir, t.ongkir, t.total_afterongkir,t.bukti_pengiriman,
                 d.id_barang, d.jumlah, d.total_harga ,
                 b.nama_barang, b.harga_barang
             FROM db_transaksi t
@@ -57,14 +57,14 @@ class ModelKurir {
         return $data;
     }
 
-    public function updateApprove($id_transaksi, $status) {
-        $query = "UPDATE db_transaksi SET status = ? WHERE id_transaksi = ?";
+    public function updateApprove($id_transaksi, $status, $bukti_pengiriman) {
+        $query = "UPDATE db_transaksi SET status = ?, bukti_pengiriman = ? WHERE id_transaksi = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii', $status, $id_transaksi);
+        $stmt->bind_param('isi', $status,$bukti_pengiriman, $id_transaksi);
         $stmt->execute();
     }
 
-    public function getTransaksiById($id_transaksi) {
+        public function getTransaksiById($id_transaksi) {
         $query = "SELECT * FROM db_transaksi WHERE id_transaksi = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id_transaksi);

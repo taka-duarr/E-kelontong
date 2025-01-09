@@ -70,31 +70,35 @@ class BarangController {
 
     public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Tangkap id_barang dari input hidden
             $id_barang = $_POST['id_barang'] ?? null;
             $nama_barang = $_POST['nama_barang'] ?? null;
             $stok_barang = $_POST['stok_barang'] ?? null;
             $harga_barang = $_POST['harga_barang'] ?? null;
-            $gambar_barang = $_FILES['gambar_barang']['name'] ?? null;
+            $gambar_barang = $_FILES['gambar_barang']['name'] ?? null; // Default jika tidak ada upload
             $status_barang = $_POST['status_barang'] ?? null;
-    
-            // Proses upload gambar jika ada
-            if (!empty($gambar_barang)) {
-                $targetDir = "imgBarang/";
-                $targetFile = $targetDir . basename($gambar_barang);
-                move_uploaded_file($_FILES["gambar_barang"]["tmp_name"], $targetFile);
-            } else {
-                // Gunakan gambar yang sudah ada (ambil dari database)
-                $existingBarang = $this->model->getBarangById($id_barang);
-                $gambar_barang = $existingBarang['gambar_barang'];
-            }
-    
+        
+            
+            $existingBarang = $this->model->getBarangById($id_barang);
+                if (!empty($gambar_barang)) {
+                    $targetDir = "imgBarang/";
+                    $targetFile = $targetDir . basename($gambar_barang);
+                    move_uploaded_file($_FILES["gambar_barang"]["tmp_name"], $targetFile);
+                }else{
+                    $gambar_barang = $existingBarang['gambar_barang'];
+                }
+        
             // Lakukan update barang
-            $this->model->updateBarang($id_barang, $nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang);
-    
-            header("Location: index.php?modul=barang&fitur=list");
+            if ($this->model->updateBarang($id_barang, $nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang)) {
+                header("Location: index.php?modul=barang&fitur=list");
+                exit;
+            } else {
+                echo "Update barang gagal.";
+            }
         }
+        
     }
+    
+    
     
 
 }

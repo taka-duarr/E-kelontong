@@ -76,6 +76,7 @@ class ModelTransaksi {
                 t.nama_kurir,
                 t.ongkir,
                 t.total_afterongkir,
+                t.bukti_pengiriman,
                 d.jumlah,
                 d.id_barang,
                 d.total_harga,

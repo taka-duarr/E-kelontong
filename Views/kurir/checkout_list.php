@@ -48,6 +48,7 @@
                 <p><strong>kurir :</strong> <?= $transaksi['nama_kurir'] ?  : 'belum disetujui'  ?></p>
                 <p><strong>ongkir :</strong> <?= $transaksi['ongkir'] ?></p>
                 <p><strong>total setelah ongkir :</strong> <?= $transaksi['total_afterongkir']  ?></p>
+                <p class="py-3 px-4 "><img src="bukti_pengiriman/<?=$transaksi['bukti_pengiriman']; ?>" alt="<?= $transaksi['bukti_pengiriman']; ?>" class="h-15 w-10 object-cover rounded"></p>
                 <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded mr-2">
                     <a href="index.php?modul=kurir&fitur=edit&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>">Update</a>
                 </button>

@@ -68,6 +68,7 @@ public function checkout($id_user) {
                     "nama_kurir" => $item["nama_kurir"],
                     "ongkir" => $item["ongkir"],
                     "total_afterongkir" => $item["total_afterongkir"],
+                    "bukti_pengiriman" => $item["bukti_pengiriman"],
                     "items" => [] // Selalu inisialisasi items sebagai array kosong
                 ];
             }
@@ -89,7 +90,10 @@ public function checkout($id_user) {
     
         // Kirim data ke view
         include 'Views/customer/invoice.php';
+        
     }
+
+    
 
         
 }

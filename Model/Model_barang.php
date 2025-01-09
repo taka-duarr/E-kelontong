@@ -47,13 +47,17 @@ class ModelBarang {
                   WHERE id_barang = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("sssssi", $nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang, $id_barang);
-
+    
         if ($stmt->execute()) {
             return true;
+        } else {
+            // Debug jika terjadi error
+            echo "Error: " . $stmt->error;
         }
-
+    
         return false;
     }
+    
 
     // Fungsi untuk menghapus data barang
     public function deleteBarang($id_barang) {

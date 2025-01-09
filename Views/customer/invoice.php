@@ -1,8 +1,3 @@
-<!-- <?php
-echo '<pre>';
-var_dump($transaksi);
-echo '</pre>';
-?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,43 +19,26 @@ echo '</pre>';
                     <div class="mb-4">
                         <h2 class="text-lg font-semibold text-black">ID Transaksi: <?= $id_transaksi + 1 ?></h2>
                         <p class="text-sm text-gray-600">
-                            Tanggal: <?= htmlspecialchars($transaksi['tanggal']) ?> | 
+                            <!-- Tanggal: <?= htmlspecialchars($transaksi['tanggal']) ?> |  -->
                             Total Harga: Rp <?= number_format($transaksi['total_all'], 0, ',', '.') ?> | 
-                            Alamat: <?= htmlspecialchars($transaksi['alamat']) ?> |
+                            <!-- Alamat: <?= htmlspecialchars($transaksi['alamat']) ?> | -->
                             Status: 
                             <?= $transaksi['status'] == 0 ? 'Menunggu persetujuan' : 
                             ($transaksi['status'] == 1 ? 'sedang dikirim' : 
                             ($transaksi['status'] == 2 ? 'telah sampai' : 'Status tidak diketahui')) ?> |
-                            nama kurir : <?= $transaksi['nama_kurir'] ? : 'menunggu persetujuan' ?> |
-                            ongkir : <?= $transaksi['ongkir'] ? : 'menunggu persetujuan' ?> |
+                            <!-- nama kurir : <?= $transaksi['nama_kurir'] ? : 'menunggu persetujuan' ?> | -->
+                            <!-- ongkir : <?= $transaksi['ongkir'] ? : 'menunggu persetujuan' ?> | -->
                             harga setelah ongkir : <?= $transaksi['total_afterongkir'] ? : 'menunggu persetujuan' ?> 
+                            <!-- bukti pengiriman : <img src="bukti_pengiriman/<?= $transaksi['bukti_pengiriman'] ?>" alt="<?= $transaksi['bukti_pengiriman'] ?>" class="h-15 w-10 object-cover rounded"> -->
                         </p>
                     </div>
 
-                    <!-- Tabel Barang -->
-                    <table class="w-full text-sm text-left text-black mb-4">
-                        <thead class="text-xs text-white uppercase bg-black">
-                            <tr>
-                                <th class="px-4 py-2">No</th>
-                                <th class="px-4 py-2">Nama Barang</th>
-                                <th class="px-4 py-2">Jumlah</th>
-                                <th class="px-4 py-2">Harga Satuan</th>
-                                <th class="px-4 py-2">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($transaksi['items'] as $index => $item): ?>
-                            <tr class="border-b">
-                                <td class="px-4 py-2"><?= $index + 1 ?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($item['nama_barang']) ?></td>
-                                <td class="px-4 py-2"><?= $item['jumlah'] ?></td>
-                                <td class="px-4 py-2">Rp <?= number_format($item['harga_barang'], 0, ',', '.') ?></td>
-                                <td class="px-4 py-2">Rp <?= number_format($item['total_harga'], 0, ',', '.') ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>    
-                    </table>
-                   
+                    <!-- Tombol Lihat Detail Barang -->
+                    <div class="text-center">
+                        <button onclick="showModal(<?= htmlspecialchars(json_encode($transaksi['items'])) ?>)" class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-300">
+                            Lihat Detail Barang
+                        </button>
+                    </div>
                 </div>
             <?php endforeach; ?>
 
@@ -78,5 +56,48 @@ echo '</pre>';
             </div>
         </div>
     </div>  
+
+    <!-- Modal Pop-up -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+        <div class="bg-white p-6 rounded-lg max-w-lg w-full shadow-lg">
+            <h2 class="text-lg font-semibold text-black mb-4">Detail Barang</h2>
+            <table class="w-full text-sm text-left text-black mb-4">
+                <thead class="text-xs text-white uppercase bg-black">
+                    <tr>
+                        <th class="px-4 py-2">No</th>
+                        <th class="px-4 py-2">Nama Barang</th>
+                        <th class="px-4 py-2">Jumlah</th>
+                        <th class="px-4 py-2">Harga Satuan</th>
+                        <th class="px-4 py-2">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="modal-body"></tbody>
+            </table>
+            <div class="text-center">
+                <button onclick="hideModal()" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Modal -->
+    <script>
+        function showModal(items) {
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = items.map((item, index) => `
+                <tr class="border-b">
+                    <td class="px-4 py-2">${index + 1}</td>
+                    <td class="px-4 py-2">${item.nama_barang}</td>
+                    <td class="px-4 py-2">${item.jumlah}</td>
+                    <td class="px-4 py-2">Rp ${new Intl.NumberFormat('id-ID').format(item.harga_barang)}</td>
+                    <td class="px-4 py-2">Rp ${new Intl.NumberFormat('id-ID').format(item.total_harga)}</td>
+                </tr>
+            `).join('');
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function hideModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>

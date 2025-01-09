@@ -28,6 +28,7 @@ class KurirController {
                     "nama_kurir" => $item["nama_kurir"],
                     "ongkir" => $item["ongkir"],
                     "total_afterongkir" => $item["total_afterongkir"],
+                    "bukti_pengiriman" => $item["bukti_pengiriman"],
                     "items" => []
                 ];
             }
@@ -59,10 +60,37 @@ class KurirController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_transaksi = $_POST['id_transaksi'];
             $status = $_POST['status'];
-            $this->model->updateApprove($id_transaksi, $status);
+            $bukti_pengiriman = '';
+    
+            // Periksa apakah file diunggah
+            if (isset($_FILES['bukti_pengiriman']) && $_FILES['bukti_pengiriman']['error'] === UPLOAD_ERR_OK) {
+                $targetDir = "bukti_pengiriman/";
+                $bukti_pengiriman = basename($_FILES["bukti_pengiriman"]["name"]);
+                $targetFile = $targetDir . $bukti_pengiriman;
+    
+                // Validasi tipe file (hanya gambar yang diperbolehkan)
+                $fileType = mime_content_type($_FILES["bukti_pengiriman"]["tmp_name"]);
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (!in_array($fileType, $allowedTypes)) {
+                    echo "Hanya file gambar yang diperbolehkan.";
+                    exit;
+                }
+    
+                // Pindahkan file ke folder tujuan
+                if (!move_uploaded_file($_FILES["bukti_pengiriman"]["tmp_name"], $targetFile)) {
+                    echo "Gagal mengunggah file.";
+                    exit;
+                }
+            }
+    
+            // Update transaksi di database
+            $this->model->updateApprove($id_transaksi, $status, $bukti_pengiriman);
+    
+            // Redirect setelah update
             header("Location: index.php?modul=kurir&fitur=list");
             exit;
         }
     }
+    
 }
 ?>

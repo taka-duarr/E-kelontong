@@ -45,6 +45,7 @@ class ApproveController {
 
         // Kirim data ke view
         include 'Views/admin/list_approve.php';
+        
     }
 
     public function edit($id_transaksi) {
@@ -55,24 +56,38 @@ class ApproveController {
     }
 
     
-
     public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_transaksi = $_POST['id_transaksi'];
             $status = $_POST['status'];
             $nama_kurir = $_POST['nama_kurir'];
             $ongkir = $_POST['ongkir'];
-
+    
+            // Ambil semua data transaksi
             $transaksi = $this->model->getAllTransaksi();
-
+    
+            $total_afterongkir = null;
             foreach ($transaksi as $item) {
-                $total_afterongkir = $item['total_all'] + $ongkir;
+                if ($item['id_transaksi'] == $id_transaksi) {
+                    $total_afterongkir = $item['total_all'] + $ongkir;
+                    break; // Hentikan iterasi setelah menemukan transaksi yang sesuai
+                }
             }
-            $this->model->UpdateApprove($id_transaksi, $status, $nama_kurir, $ongkir, $total_afterongkir);
-
-            header("Location: index.php?modul=approve&fitur=list");
-            exit;
+    
+            if ($total_afterongkir !== null) {
+                // Update data transaksi
+                $this->model->UpdateApprove($id_transaksi, $status, $nama_kurir, $ongkir, $total_afterongkir);
+    
+                // Redirect ke halaman list setelah update
+                header("Location: index.php?modul=approve&fitur=list");
+                exit;
+            } else {
+                echo "Transaksi tidak ditemukan.";
+            }
         }
     }
+    
+    
+
 }
 ?>
