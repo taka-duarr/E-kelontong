@@ -90,9 +90,11 @@ public function checkout($id_user) {
         $groupedTransaksi = array_values($groupedTransaksi);
     
         // Kirim data ke view
-        include 'Views/customer/invoice.php';
+        include 'Views/customer/list_pesanan.php';
         
     }
+
+    
 
     
 

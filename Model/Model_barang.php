@@ -94,6 +94,18 @@ class ModelBarang {
         }
         return null;
     }
+
+    function searchBarang($keyword) {
+        
+        $sql = "SELECT * FROM db_barang WHERE nama_barang LIKE ?";
+        $stmt = $this->db->prepare($sql);
+        $search = '%' . $keyword . '%';
+        $stmt->bind_param('s', $search);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    
     
 
     

@@ -40,6 +40,9 @@
             case 'update':
                 $controller->update();
                 break;
+            case 'search':
+                $controller->searchBarang();
+                break;
 
             default:
                 echo "Fitur tidak ditemukan!";

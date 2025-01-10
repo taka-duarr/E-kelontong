@@ -63,7 +63,6 @@ class ControllerKeranjang {
             $result = $this->ModelKeranjang->updateKeranjang($id_barang, $jumlah);
 
             if ($result) {
-                $_SESSION['notification'] = "Item berhasil diupdate!";
                 header('Location: index.php?modul=cart&fitur=list');
             } else {
                 echo "Error updating cart.";

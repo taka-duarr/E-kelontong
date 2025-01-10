@@ -122,12 +122,8 @@ class ModelTransaksi {
         $stmt->bind_param("i", $id_user);
         return $stmt->execute();
     }
-    
-    
-    
-    
-    
-    
+
+   
 
 }
 

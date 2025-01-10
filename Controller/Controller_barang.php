@@ -12,8 +12,11 @@ class BarangController {
         $Barangs = $this->model->getAllBarang();
         
             // include 'Views/customer/shop.php'; // View untuk customer
+            echo json_encode($Barangs);
+            exit;
         
             include 'Views/admin/barang_list.php'; // View untuk admin
+
         
     }
 
@@ -97,9 +100,17 @@ class BarangController {
         }
         
     }
-    
-    
-    
 
+    public function searchBarang() {
+        if (isset($_GET['q'])) {
+            $keyword = $_GET['q'];
+            $results = $this->model->searchBarang($keyword);
+            header('Content-Type: application/json');
+            echo json_encode($results); // Return hasil dalam JSON
+        } else {
+            echo json_encode([]); // Return array kosong jika tidak ada query
+        }
+    }
+    
 }
 ?>

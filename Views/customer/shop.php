@@ -37,11 +37,12 @@
         <div class="col-lg-6 d-flex justify-content-between align-items-center">
             <!-- Search Bar -->
             <div class="input-group w-100" style="max-width: 90%;">
-                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ..." aria-label="Search" aria-describedby="basic-addon2">
-                <button class="btn btn-dark" type="submit">
-                    <i class="fa fa-fw fa-search text-white"></i>
-                </button>
-            </div>
+            <input type="text" id="liveSearch" class="form-control" placeholder="Search ..." aria-label="Search">
+        </div>
+        
+    
+
+
 
             <?php
             if (isset($_SESSION['notification'])) {
@@ -91,7 +92,7 @@
 
     <!-- Start Content -->
     <div class="container mt-4 ">
-    <div class="row ">
+    <div class="row"  id="searchResults">
         <?php if (!empty($Barangs)) { ?>
             <?php foreach ($Barangs as $item) { ?>
                 <?php if ($item['status_barang'] == 1) { ?>
@@ -145,5 +146,90 @@
     <script src="Views/customer/assets/js/bootstrap.bundle.min.js"></script>
     </body>
 </body>
+<script>
+    document.getElementById('liveSearch').addEventListener('input', function () {
+    const query = this.value.trim();
+    const resultsContainer = document.getElementById('searchResults');
 
+    if (query.length > 0) {
+        fetch(`index.php?modul=barang&fitur=search&q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                resultsContainer.innerHTML = ''; // Kosongkan hasil sebelumnya
+
+                if (data.length > 0) {
+                    data.forEach(item => {
+                        const card = `
+                            <div class="col-md-3 mb-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="img-container">
+                                        <img src="imgBarang/${item.gambar_barang}" class="card-img-top img-fluid" alt="${item.nama_barang}">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">${item.nama_barang}</h5>
+                                        <p class="card-text">Harga: Rp ${parseInt(item.harga_barang).toLocaleString()}</p>
+                                        <p class="card-text">Stok: ${item.stok_barang}</p>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <form method="POST" action="index.php?modul=cart&fitur=add">
+                                            <input type="hidden" name="id_barang" value="${item.id_barang}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="btn btn-dark">
+                                                <i class="fa fa-fw fa-cart-arrow-down text-light me-2"></i>Keranjang
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        resultsContainer.insertAdjacentHTML('beforeend', card);
+                    });
+                } else {
+                    resultsContainer.innerHTML = '<p class="text-center">Tidak ada barang yang sesuai dengan pencarian Anda.</p>';
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    } else {
+        // Tampilkan kembali daftar barang awal saat input kosong
+        fetch('index.php?modul=barang&fitur=list&format=json')
+            .then(response => response.json())
+            .then(data => {
+                resultsContainer.innerHTML = ''; // Kosongkan hasil sebelumnya
+
+                if (data.length > 0) {
+                    data.forEach(item => {
+                        const card = `
+                            <div class="col-md-3 mb-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="img-container">
+                                        <img src="imgBarang/${item.gambar_barang}" class="card-img-top img-fluid" alt="${item.nama_barang}">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">${item.nama_barang}</h5>
+                                        <p class="card-text">Harga: Rp ${parseInt(item.harga_barang).toLocaleString()}</p>
+                                        <p class="card-text">Stok: ${item.stok_barang}</p>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <form method="POST" action="index.php?modul=cart&fitur=add">
+                                            <input type="hidden" name="id_barang" value="${item.id_barang}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="btn btn-dark">
+                                                <i class="fa fa-fw fa-cart-arrow-down text-light me-2"></i>Keranjang
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        resultsContainer.insertAdjacentHTML('beforeend', card);
+                    });
+                } else {
+                    resultsContainer.innerHTML = '<p class="text-center">Tidak ada barang yang tersedia.</p>';
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+});
+
+    </script>
 </html>
