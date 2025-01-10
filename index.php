@@ -40,9 +40,7 @@
             case 'update':
                 $controller->update();
                 break;
-            case 'search':
-                $controller->searchBarang();
-                break;
+            
 
             default:
                 echo "Fitur tidak ditemukan!";
@@ -53,6 +51,12 @@
         switch ($fitur) {
             case 'shop':
                 $controller->customerShop();
+                break;
+            case 'search':
+                    $controller->searchBarang();
+                    break;
+            case 'getbarang':
+                $controller->getBarangForShop();
                 break;
             default:
                 echo "Fitur tidak ditemukan!";

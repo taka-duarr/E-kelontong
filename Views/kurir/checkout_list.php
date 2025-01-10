@@ -25,6 +25,7 @@
                         <th>ID Transaksi</th>
                         <th>Tanggal</th>
                         <th>Total </th>
+                        <th> Nama penerima</th>
                         <th> Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -35,6 +36,7 @@
                             <td><?= $transaksi['id_transaksi'] ?></td>
                             <td><?= $transaksi['tanggal'] ?></td>
                             <td>Rp <?= number_format($transaksi['total_afterongkir'], 0, ',', '.') ?></td>
+                            <td><?= $transaksi['nama_user']?></td>
                             <td class="badge mt-5 <?= $transaksi['status'] == 0 ? 'badge-warning' : ($transaksi['status'] == 1 ? 'badge-info' : 'badge-success') ?>">
                             <?php 
                             if ($transaksi['status'] == 1) echo 'sedang dikirim';

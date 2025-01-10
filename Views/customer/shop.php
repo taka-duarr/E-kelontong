@@ -51,12 +51,30 @@
                         icon: 'success',
                         title: 'Berhasil',
                         text: '{$_SESSION['notification']}',
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            confirmButton: 'custom-confirm-button' // Tambahkan class khusus
+                        }
                     });
                 </script>";
                 unset($_SESSION['notification']); // Hapus notifikasi setelah ditampilkan
-            }
+            }            
             ?>
+
+<style>
+    .custom-confirm-button {
+        background-color:rgb(0, 0, 0) !important; /* Warna tombol */
+        color: white !important; /* Warna teks tombol */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    .custom-confirm-button:hover {
+        background-color:rgb(56, 59, 57) !important; /* Warna saat tombol di-hover */
+    }
+</style>
+
 
             <!-- Cart Icon -->
             <a href="index.php?modul=cart&fitur=list" class="nav-icon position-relative text-decoration-none" >
@@ -145,14 +163,13 @@
 
     <script src="Views/customer/assets/js/bootstrap.bundle.min.js"></script>
     </body>
-</body>
-<script>
+    <script>
     document.getElementById('liveSearch').addEventListener('input', function () {
     const query = this.value.trim();
     const resultsContainer = document.getElementById('searchResults');
 
     if (query.length > 0) {
-        fetch(`index.php?modul=barang&fitur=search&q=${encodeURIComponent(query)}`)
+        fetch(`index.php?modul=cust&fitur=search&q=${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
                 resultsContainer.innerHTML = ''; // Kosongkan hasil sebelumnya
@@ -191,9 +208,10 @@
             .catch(error => console.error('Error fetching data:', error));
     } else {
         // Tampilkan kembali daftar barang awal saat input kosong
-        fetch('index.php?modul=barang&fitur=list&format=json')
+        fetch('index.php?modul=cust&fitur=getbarang')
             .then(response => response.json())
             .then(data => {
+                console.log('All items:', data);
                 resultsContainer.innerHTML = ''; // Kosongkan hasil sebelumnya
 
                 if (data.length > 0) {
@@ -231,5 +249,8 @@
     }
 });
 
+
     </script>
+</body>
+
 </html>

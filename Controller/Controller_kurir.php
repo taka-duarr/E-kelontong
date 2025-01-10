@@ -29,6 +29,7 @@ class KurirController {
                     "ongkir" => $item["ongkir"],
                     "total_afterongkir" => $item["total_afterongkir"],
                     "bukti_pengiriman" => $item["bukti_pengiriman"],
+                    "nama_user" => $item["nama_user"],
                     "items" => []
                 ];
             }

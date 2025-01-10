@@ -11,19 +11,20 @@ class BarangController {
     public function list_barang() {
         $Barangs = $this->model->getAllBarang();
         
-            // include 'Views/customer/shop.php'; // View untuk customer
-            echo json_encode($Barangs);
-            exit;
-        
             include 'Views/admin/barang_list.php'; // View untuk admin
-
         
     }
 
     public function customerShop() {
         $Barangs = $this->model->getAllBarang(); // Ambil semua barang dari model
         include 'Views/customer/shop.php'; // Oper view shop.php
+       
+        
     }
+
+    
+
+    
     
 
     
@@ -100,6 +101,14 @@ class BarangController {
         }
         
     }
+
+    public function getBarangForShop() {
+        $Barangs = $this->model->getAllBarang(); // Pastikan method ini mengembalikan semua barang
+        header('Content-Type: application/json');
+        echo json_encode($Barangs);
+        exit;
+    }
+    
 
     public function searchBarang() {
         if (isset($_GET['q'])) {
