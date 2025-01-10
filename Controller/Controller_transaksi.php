@@ -8,6 +8,7 @@
         }
     
 public function checkout($id_user) {
+    $nama_user = $_SESSION['user']['username'];
     $cart_items = $this->model->getCartItemsByUser($id_user);
     $alamat = $_POST['alamat'] ?? 'nuuh';
 
@@ -28,7 +29,7 @@ public function checkout($id_user) {
     }
 
     $status = 'pending';
-    $id_transaksi = $this->model->saveTransaksi($id_user, $total_harga, $status, $alamat);
+    $id_transaksi = $this->model->saveTransaksi($id_user,$nama_user, $total_harga, $status, $alamat);
 
     if ($id_transaksi) {
         foreach ($cart_items as $item) {

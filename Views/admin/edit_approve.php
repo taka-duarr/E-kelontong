@@ -37,7 +37,7 @@ echo '</pre>';
                         <select id="status" name="status" 
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                             <option value="1" <?php echo $transaksi['status'] == 1 ? 'selected' : ''; ?>>setujui</option>
-                            <option value="0" <?php echo $transaksi['status'] == 0 ? 'selected' : ''; ?>>tidak dietujui</option>
+                            <option value="0" <?php echo $transaksi['status'] == 0 ? 'selected' : ''; ?>>tidak disetujui</option>
                         </select>
                     </div>
 

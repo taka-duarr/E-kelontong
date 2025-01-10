@@ -16,10 +16,10 @@ class ModelTransaksi {
 
     // Simpan transaksi uta
 
-    public function saveTransaksi($id_user, $total_harga, $status, $alamat) {
-        $query = "INSERT INTO db_transaksi (id_user, total_harga, status, alamat, tanggal) VALUES (?, ?, ?, ?, NOW())";
+    public function saveTransaksi($id_user, $nama_user, $total_harga, $status, $alamat) {
+        $query = "INSERT INTO db_transaksi (id_user,nama_user, total_harga, status, alamat, tanggal) VALUES (?, ?, ?, ?, ?, NOW())";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("iiis", $id_user, $total_harga, $status, $alamat);
+        $stmt->bind_param("isiis", $id_user,$nama_user, $total_harga, $status, $alamat);
 
         if ($stmt->execute()) {
             return $this->db->insert_id; // Mengembalikan id_transaksi yang baru dibuat
@@ -69,6 +69,7 @@ class ModelTransaksi {
         $query = "
             SELECT 
                 t.id_transaksi, 
+                t.nama_user,
                 t.tanggal, 
                 t.total_harga AS total_all, 
                 t.status,
@@ -86,7 +87,9 @@ class ModelTransaksi {
             JOIN db_detail_transaksi d ON t.id_transaksi = d.id_transaksi
             JOIN db_barang b ON d.id_barang = b.id_barang
             WHERE t.id_user = ?
+            ORDER BY t.tanggal DESC
         ";
+
         
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id_user);

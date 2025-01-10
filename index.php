@@ -24,12 +24,8 @@
         switch ($fitur) {
             case 'list':
                 $controller->list_barang();
-
                 break;
-
-
             case 'input':
-                // Contoh: Form input barang
                 $controller->addBarang();
                 break;
 
@@ -127,12 +123,6 @@
                 }
     }elseif($modul === 'cart'){
         $controller = new ControllerKeranjang();
-        // echo '<pre>';
-        // print_r($_SERVER);
-        // print_r($_POST);
-        // print_r($_GET);
-        // echo '</pre>';
-        // die();
         switch ($fitur) {
             case 'list':
                 $controller->listKeranjang();
@@ -175,6 +165,10 @@
             case 'edit':
                 $controller->edit($_GET['id_transaksi']);
                 break;
+            case 'printReport':
+                $controller->listAllTransaksi();
+                break;
+            
 
     }
 }elseif($modul === 'kurir'){

@@ -1,102 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konfirmasi Transaksi</title>
+    <title>E-Kelontong - List Transaksi</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-900">
-    <div class="min-h-screen py-10 px-5">
-        <div class="max-w-4xl mx-auto space-y-6">
-            <h1 class="text-2xl font-bold text-black text-center">Konfirmasi Transaksi</h1>
-            <?php  $groupedTransaksi = array_reverse($groupedTransaksi, true); ?>
-            
-            <!-- Pengelompokan Berdasarkan Transaksi -->
-            <?php foreach ($groupedTransaksi as $id_transaksi => $transaksi): ?>
-                <div class="rounded-lg bg-white shadow-lg p-6 border border-gray-300">
-                    <!-- Informasi Transaksi -->
-                    <div class="mb-4">
-                        <h2 class="text-lg font-semibold text-black">ID Transaksi: <?= $id_transaksi + 1 ?></h2>
-                        <p class="text-sm text-gray-600">
-                            <!-- Tanggal: <?= htmlspecialchars($transaksi['tanggal']) ?> |  -->
-                            Total Harga: Rp <?= number_format($transaksi['total_all'], 0, ',', '.') ?> | 
-                            <!-- Alamat: <?= htmlspecialchars($transaksi['alamat']) ?> | -->
-                            Status: 
-                            <?= $transaksi['status'] == 0 ? 'Menunggu persetujuan' : 
-                            ($transaksi['status'] == 1 ? 'sedang dikirim' : 
-                            ($transaksi['status'] == 2 ? 'telah sampai' : 'Status tidak diketahui')) ?> |
-                            <!-- nama kurir : <?= $transaksi['nama_kurir'] ? : 'menunggu persetujuan' ?> | -->
-                            <!-- ongkir : <?= $transaksi['ongkir'] ? : 'menunggu persetujuan' ?> | -->
-                            harga setelah ongkir : <?= $transaksi['total_afterongkir'] ? : 'menunggu persetujuan' ?> 
-                            <!-- bukti pengiriman : <img src="bukti_pengiriman/<?= $transaksi['bukti_pengiriman'] ?>" alt="<?= $transaksi['bukti_pengiriman'] ?>" class="h-15 w-10 object-cover rounded"> -->
-                        </p>
-                    </div>
+<body class="bg-base-200 min-h-screen">
+    <div class="container mx-auto py-8 px-4">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-black">List Transaksi</h1>
+            <p class="text-base-content/70 mt-2">Cek detail transaksi Anda di bawah ini</p>
+        </header>
 
-                    <!-- Tombol Lihat Detail Barang -->
-                    <div class="text-center">
-                        <button onclick="showModal(<?= htmlspecialchars(json_encode($transaksi['items'])) ?>)" class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-300">
-                            Lihat Detail Barang
-                        </button>
+        <div class="space-y-6">
+            <?php foreach ($groupedTransaksi as  $transaksi): ?>
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <div class="flex justify-between items-center flex-wrap gap-4">
+                            <div>
+                                <h2 class="card-title">ID Transaksi: <?= $transaksi['id_transaksi'] ?></h2>
+                                
+                                <p class="text-sm">
+                                    Status: 
+                                    <span class="badge <?= $transaksi['status'] == 0 ? 'badge-warning' : ($transaksi['status'] == 1 ? 'badge-info' : 'badge-success') ?>">
+                                        <?php 
+                                        if ($transaksi['status'] == 0) echo 'Menunggu persetujuan';
+                                        else if ($transaksi['status'] == 1) echo 'Sedang dikirim';
+                                        else echo 'Telah sampai';
+                                        ?>
+                                    </span>
+                                </p>
+                                <?php if ($transaksi['status'] == 1 || $transaksi['status'] == 2): ?>
+                                    <p class="text-sm">
+                                        Total setelah ongkir: <span class="font-semibold text-success">Rp <?= number_format($transaksi['total_afterongkir'], 0, ',', '.') ?></span>
+                                    </p>
+                                <?php elseif ($transaksi['status'] == 0): ?>
+                                <p class="text-sm">
+                                    Total Harga: <span class="font-semibold text-success">Rp <?= number_format($transaksi['total_all'], 0, ',', '.') ?></span>
+                                </p>
+                                <?php endif; ?>
+                            </div>
+                            <button onclick="showModal(<?= htmlspecialchars(json_encode($transaksi)) ?>)" class="btn bg-black text-white ">
+                                Lihat Detail
+                            </button>
+                        </div>
+
+                        <div class="overflow-x-auto mt-4">
+                            <table class="table table-zebra w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Barang</th>
+                                        <th>Jumlah</th>
+                                        <th>Harga Satuan</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($transaksi['items'] as $item): ?>
+                                        <tr>
+                                            <td><?= $item['nama_barang'] ?></td>
+                                            <td><?= $item['jumlah'] ?></td>
+                                            <td>Rp <?= number_format($item['harga_barang'], 0, ',', '.') ?></td>
+                                            <td>Rp <?= number_format($item['total_harga'], 0, ',', '.') ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
-
-            <!-- Pesan Terima Kasih -->
-            <div class="text-center mt-8">
-                <h3 class="text-gray-800">Terima kasih telah berbelanja di <span class="font-semibold">E-Kelontong!</span></h3>
-                <p class="text-sm text-gray-600 mt-2">Barang pesanan Anda akan segera diproses.</p>
-            </div>
-
-            <!-- Tombol Kembali -->
-            <div class="text-center">
-                <a href="index.php?modul=cust&fitur=shop" class="px-6 py-3 text-white bg-black rounded-lg hover:bg-gray-700 transition duration-300">
-                    Kembali ke Beranda
-                </a>
-            </div>
         </div>
-    </div>  
 
-    <!-- Modal Pop-up -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-        <div class="bg-white p-6 rounded-lg max-w-lg w-full shadow-lg">
-            <h2 class="text-lg font-semibold text-black mb-4">Detail Barang</h2>
-            <table class="w-full text-sm text-left text-black mb-4">
-                <thead class="text-xs text-white uppercase bg-black">
-                    <tr>
-                        <th class="px-4 py-2">No</th>
-                        <th class="px-4 py-2">Nama Barang</th>
-                        <th class="px-4 py-2">Jumlah</th>
-                        <th class="px-4 py-2">Harga Satuan</th>
-                        <th class="px-4 py-2">Total</th>
-                    </tr>
-                </thead>
-                <tbody id="modal-body"></tbody>
-            </table>
-            <div class="text-center">
-                <button onclick="hideModal()" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">Tutup</button>
+        <footer class="text-center mt-12">
+            <h3 class="text-xl font-semibold">Terima kasih telah berbelanja di <span class="text-primary">E-Kelontong!</span></h3>
+            <p class="text-base-content/70 mt-2">Uangmu Semangatku</p>
+            <a href="index.php?modul=cust&fitur=shop" class="btn btn-neutral mt-4">Kembali ke Beranda</a>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg mb-4">Detail Transaksi</h3>
+            <div id="modal-header" class="space-y-2 mb-4"></div>
+            <div class="overflow-x-auto">
+                <table class="table table-zebra w-full">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Barang</th>
+                            <th>Jumlah</th>
+                            <th>Harga Satuan</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-body"></tbody>
+                </table>
+            </div>
+            <div class="modal-action">
+                <button onclick="hideModal()" class="btn">Tutup</button>
             </div>
         </div>
     </div>
 
-    <!-- Script Modal -->
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+    <div class="modal-box max-w">
+        <!-- Tambahkan batas maksimal ukuran gambar -->
+        <img id="image-modal-content" class="max-w-[200px] h-auto mx-auto object-contain" alt="Bukti Pengiriman">
+        <div class="modal-action">
+            <button onclick="hideImageModal()" class="btn">Tutup</button>
+        </div>
+    </div>
+</div>
+
+
+
     <script>
-        function showModal(items) {
-            const modalBody = document.getElementById('modal-body');
-            modalBody.innerHTML = items.map((item, index) => `
-                <tr class="border-b">
-                    <td class="px-4 py-2">${index + 1}</td>
-                    <td class="px-4 py-2">${item.nama_barang}</td>
-                    <td class="px-4 py-2">${item.jumlah}</td>
-                    <td class="px-4 py-2">Rp ${new Intl.NumberFormat('id-ID').format(item.harga_barang)}</td>
-                    <td class="px-4 py-2">Rp ${new Intl.NumberFormat('id-ID').format(item.total_harga)}</td>
+        function showModal(transaksi) {
+            const { id_transaksi, status, total_all, total_afterongkir, items, tanggal, alamat, nama_kurir, ongkir, bukti_pengiriman } = transaksi;
+
+            let modalHeader = `
+                <p><strong>ID Transaksi:</strong> ${id_transaksi}</p>
+                <p><strong>Status:</strong> 
+                    <span class="badge ${status == 0 ? 'badge-warning' : (status == 1 ? 'badge-info' : 'badge-success')}">
+                        ${status == 0 ? 'Menunggu persetujuan' : status == 1 ? 'Sedang dikirim' : 'Telah sampai'}
+                    </span>
+                </p>
+                <p><strong>Tanggal:</strong> ${tanggal}</p>
+                <p><strong>Alamat Pengiriman:</strong> ${alamat}</p>
+                <p><strong>Total Harga:</strong> Rp ${new Intl.NumberFormat('id-ID').format(total_all)}</p>
+            `;
+
+            if (status > 0) {
+                modalHeader += `
+                    <p><strong>Nama Kurir:</strong> ${nama_kurir}</p>
+                    <p><strong>Ongkir:</strong> Rp ${new Intl.NumberFormat('id-ID').format(ongkir)}</p>
+                    <p><strong>Total Harga Setelah Ongkir:</strong> Rp ${
+                        total_afterongkir ? new Intl.NumberFormat('id-ID').format(total_afterongkir) : 'Menunggu persetujuan'
+                    }</p>
+                `;
+            }
+
+            if (status == 2) {
+                modalHeader += `
+                    <p><strong>Bukti Pengiriman:</strong> <button onclick="showImageModal('bukti_pengiriman/${bukti_pengiriman}')" class="btn btn-xs btn-outline btn-info">Lihat Gambar</button></p>
+                `;
+            }
+
+            const modalBody = items.map((item, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item.nama_barang}</td>
+                    <td>${item.jumlah}</td>
+                    <td>Rp ${new Intl.NumberFormat('id-ID').format(item.harga_barang)}</td>
+                    <td>Rp ${new Intl.NumberFormat('id-ID').format(item.total_harga)}</td>
                 </tr>
             `).join('');
-            document.getElementById('modal').classList.remove('hidden');
+
+            document.getElementById('modal-header').innerHTML = modalHeader;
+            document.getElementById('modal-body').innerHTML = modalBody;
+            document.getElementById('modal').classList.add('modal-open');
         }
 
         function hideModal() {
-            document.getElementById('modal').classList.add('hidden');
+            document.getElementById('modal').classList.remove('modal-open');
+        }
+
+        function showImageModal(imageUrl) {
+            const imageModal = document.getElementById('image-modal');
+            const imageContent = document.getElementById('image-modal-content');
+            imageContent.src = imageUrl;
+            imageModal.classList.add('modal-open');
+        }
+
+        function hideImageModal() {
+            document.getElementById('image-modal').classList.remove('modal-open');
         }
     </script>
 </body>

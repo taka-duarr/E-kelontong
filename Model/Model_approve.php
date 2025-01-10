@@ -20,7 +20,7 @@ class ModelApprove {
     public function getAllTransaksi() {
         $query = "
             SELECT 
-                t.id_transaksi, t.tanggal, t.total_harga AS total_all, t.alamat, t.status,t.nama_kurir, t.ongkir, t.total_afterongkir,
+                t.id_transaksi, t.tanggal, t.total_harga AS total_all, t.alamat, t.status,t.nama_kurir, t.ongkir, t.total_afterongkir,t.bukti_pengiriman,t.nama_user,
                 d.id_barang, d.jumlah, d.total_harga,
                 b.nama_barang, b.harga_barang
             FROM db_transaksi t
