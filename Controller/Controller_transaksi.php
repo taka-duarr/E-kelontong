@@ -50,6 +50,7 @@ public function checkout($id_user) {
 }
 
     public function listTransaksi() {
+        //aggregasi = mengambil data detail transaksi
         $id_user = $_SESSION['user']['id'];
         $transaksi = $this->model->getListTransaksi($id_user);
     
@@ -94,11 +95,6 @@ public function checkout($id_user) {
         
     }
 
-    
-
-    
-
-        
 }
     ?>
 

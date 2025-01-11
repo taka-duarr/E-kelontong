@@ -9,20 +9,10 @@ class ModelKeranjang {
     }
     
     public function connectDatabase() {
-        $database = new Database(); // Membuat instance dari class Database
-        $this->db = $database->connect(); // Mengambil koneksi dari class Database
+        //Aggregation adalah jenis hubungan "has-a" di mana objek yang satu dapat berdiri sendiri tanpa keberadaan objek lainnya.
+        $database = new Database();
+        $this->db = $database->connect(); 
     }
-
-    // public function createKeranjang($id_user, $id_barang, $jumlah = 1) {
-    //     $query = "INSERT INTO db_cart (id_user, id_barang, jumlah) 
-    //               VALUES (?, ?, ?) 
-    //               ON DUPLICATE KEY UPDATE jumlah = jumlah + ?";
-    //     $stmt = $this->db->prepare($query);
-    //     $stmt->bind_param("iiii", $id_user, $id_barang, $jumlah, $jumlah);
-    //     $result = $stmt->execute();
-    //     $stmt->close();
-    //     return $result;
-    // }
 
     public function createKeranjang($id_user, $id_barang, $jumlah) {
         // Cek apakah barang sudah ada di keranjang

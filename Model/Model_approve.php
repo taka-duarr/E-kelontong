@@ -70,34 +70,6 @@ class ModelApprove {
         return $kurir;
     }
     
-
-    
-    
-
-
-
-    // public function getPendingTransactions() {
-    //     $query = "SELECT * FROM db_transaksi WHERE status = 0";
-    //     $stmt = $this->db->query($query);
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
-
-    // public function approveTransaction($id_transaksi) {
-    //     $query = "UPDATE db_transaksi SET status = 1 WHERE id_transaksi = :id_transaksi";
-    //     $stmt = $this->db->prepare($query);
-    //     $stmt->bindParam(':id_transaksi', $id_transaksi);
-    //     $stmt->execute();
-    // }
-
-    // public function getUserTransactions($id_user) {
-    //     $query = "SELECT * FROM db_transaksi WHERE id_user = :id_user ORDER BY created_at DESC";
-    //     $stmt = $this->db->prepare($query);
-    //     $stmt->bindParam(':id_user', $id_user);
-    //     $stmt->execute();
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
-    
-    
     
 }
 

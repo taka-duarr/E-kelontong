@@ -12,6 +12,7 @@ class ApproveController {
 
     public function listAllTransaksi() {
         $transaksi = $this->model->getAllTransaksi();
+        $kurir = $this->model->getAllKurir();
     
         // Ambil filter dari request (GET)
         $filterTanggal = $_GET['tanggal'] ?? null;
@@ -47,11 +48,13 @@ class ApproveController {
         }
     
         // Terapkan filter nama kurir
+        // Terapkan filter nama kurir
         if ($filterNamaKurir) {
             $transaksi = array_filter($transaksi, function ($item) use ($filterNamaKurir) {
                 return isset($item['nama_kurir']) && is_string($item['nama_kurir']) && stripos($item['nama_kurir'], $filterNamaKurir) !== false;
             });
         }
+
             
     
         // Mengelompokkan data transaksi
@@ -107,15 +110,6 @@ class ApproveController {
         // Kirim data ke view
         include 'Views/admin/list_approve.php';
     }
-
-
-    // Kirim data ke view untuk cetak laporan
-    
-
-
-
-    
-    
 
     public function edit($id_transaksi) {
         $transaksi = $this->model->getTransaksiById($id_transaksi);

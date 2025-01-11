@@ -45,8 +45,8 @@ echo '</pre>';
                         <label for="status_role" class="block text-gray-700 text-sm font-bold mb-2">Status Role:</label>
                         <select id="status_role" name="status_role" 
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                            <option value="1" <?php echo $role['status_role'] == 1 ? 'selected' : ''; ?>>Ada</option>
-                            <option value="0" <?php echo $role['status_role'] == 0 ? 'selected' : ''; ?>>Tidak Ada</option>
+                            <option value="1" <?php echo $role['status_role'] == 1 ? 'selected' : ''; ?>>Aktif</option>
+                            <option value="0" <?php echo $role['status_role'] == 0 ? 'selected' : ''; ?>>Tidak Aktif</option>
                         </select>
                     </div>
 

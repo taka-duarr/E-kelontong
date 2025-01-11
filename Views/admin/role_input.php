@@ -26,7 +26,7 @@
                     <!-- Nama Barang -->
                     <div class="mb-4">
                         <label for="nama_role" class="block text-gray-700 text-sm font-bold mb-2">Role:</label>
-                        <input type="text" id="nama_role" name="nama_role" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan Nama Barang" required>
+                        <input type="text" id="nama_role" name="nama_role" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan Nama Role" required>
                     </div>
 
                     <!-- Status Barang -->
@@ -34,10 +34,10 @@
                         <label for="status_role" class="block text-gray-700 text-sm font-bold mb-2">Status role:</label>
                         <select id="status_role" name="status_role" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                             <option value="">Pilih Status</option>
-                            <option value="1">Ada</option>
-                            <option value="0">Tidak Ada</option>
+                            <option value="1">Aktif</option>
+                            <option value="0">Tidak Aktif</option>
                         </select>
-                        <p class="text-sm text-gray-500 mt-1">Pilih "Ada" jika barang tersedia, "Tidak Ada" jika barang habis.</p>
+                        
                     </div>
 
                     <!-- Submit Button -->

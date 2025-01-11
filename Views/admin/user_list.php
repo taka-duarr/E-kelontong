@@ -1,71 +1,61 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Role</title>
+    <title>List User</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body class="bg-base-200 min-h-screen">
 
 <!-- Navbar -->
 <?php include 'includes/navbar.php'; ?>
 
-<!-- Main container -->
 <div class="flex">
     <!-- Sidebar -->
     <?php include 'includes/sidebar.php'; ?>
 
     <!-- Main Content -->
-    <div class="flex-1 p-8">
-        <div class="container mx-auto">
-            <!-- Button to Insert New Barang -->
-            <div class="mb-4">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    <a href="index.php?modul=user&fitur=input">Insert New User</a>
-                </button>
-            </div>
+    <div class="container mx-auto py-8 px-4">
+        <!-- Insert Button -->
+        <div class="mb-6">
+            <a href="index.php?modul=user&fitur=input" class="btn btn-primary">Insert New User</a>
+        </div>
 
-            <!-- Barang Table -->
-            <div class="bg-white shadow-md rounded my-6">
-                <table class="min-w-full bg-white">
-                    <thead class="bg-gray-800 text-white">
-                        <tr>
-                            <th class="w-1/12 py-3 px-4 uppercase font-semibold text-sm">ID User</th>
-                            <th class="w-1/5 py-3 px-4 uppercase font-semibold text-sm">User</th>
-                            <th class="w-1/4 py-3 px-4 uppercase font-semibold text-sm">Password</th>
-                            <th class="w-1/4 py-3 px-4 uppercase font-semibold text-sm">Role</th>
-                            <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-700">
-                        <!-- Dynamic Rows -->
-                        <?php if (!empty($users)): ?>
-                            <?php foreach ($users as $user): ?>
-                                <tr class="text-center">
-                                    <td class="py-3 px-4 text-blue-600"><?php echo htmlspecialchars($user['id_user']); ?></td>
-                                    <td class="py-3 px-4"><?php echo htmlspecialchars($user['nama_user']); ?></td>
-                                    <td class="py-3 px-4"><?php echo htmlspecialchars($user['password_user']); ?></td>
-                                    <td class="py-3 px-4"><?php echo htmlspecialchars($user['nama_role']); ?></td>
-                                    <td class="py-3 px-4">
-                                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded mr-2">
-                                            <a href="index.php?modul=user&fitur=edit&id_user=<?php echo $user['id_user']; ?>">Update</a>
-                                        </button>
-                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">
-                                            <a href="index.php?modul=user&fitur=delete&id_user=<?php echo $user['id_user']; ?>">Delete</a>
-                                        </button>
-                                    </td>   
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
+        <!-- User Table -->
+        <div class="overflow-x-auto">
+            <table class="table table-zebra w-full ">
+                <thead>
+                    <tr>
+                        <th class="w-1/12">ID User</th>
+                        <th class="w-1/4">User</th>
+                        <th class="w-1/4">Password</th>
+                        <th class="w-1/4">Role</th>
+                        <th class="w-1/6">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($users)): ?>
+                        <?php foreach ($users as $user): ?>
                             <tr>
-                                <td colspan="5" class="text-center py-4">No data available.</td>
+                                <td><?= htmlspecialchars($user['id_user']); ?></td>
+                                <td><?= htmlspecialchars($user['nama_user']); ?></td>
+                                <td><?= htmlspecialchars($user['password_user']); ?></td>
+                                <td><?= htmlspecialchars($user['nama_role']); ?></td>
+                                <td>
+                                    <a href="index.php?modul=user&fitur=edit&id_user=<?= $user['id_user']; ?>" class="btn btn-sm btn-success">Update</a>
+                                    <a href="index.php?modul=user&fitur=delete&id_user=<?= $user['id_user']; ?>" class="btn btn-sm btn-error">Delete</a>
+                                </td>
                             </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5" class="text-center">No data available.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

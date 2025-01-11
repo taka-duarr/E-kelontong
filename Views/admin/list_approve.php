@@ -13,11 +13,8 @@
 <?php include 'includes/sidebar.php'; ?>
 <body class="bg-base-200 min-h-screen">
     <div class="container mx-auto py-8 px-4">
-        <header class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-black">List Pesanan</h1>
-            
-        </header>
-        <form method="GET" action="index.php" class="flex flex-wrap gap-4 mb-6">
+        
+        <form method="GET" action="index.php" class="flex flex-wrap gap-4 mb-8">
     <input type="hidden" name="modul" value="approve">
     <input type="hidden" name="fitur" value="list">
 
@@ -39,10 +36,22 @@
     </div>
 
     <!-- Filter Nama Kurir -->
+    
+
     <div class="form-control">
-        <label for="nama_kurir" class="label">Nama Kurir</label>
-        <input type="text" name="nama_kurir" id="nama_kurir" value="<?= htmlspecialchars($_GET['nama_kurir'] ?? '') ?>" class="input input-bordered" placeholder="Nama Kurir">
+    <label for="nama_kurir" class="label">Nama Kurir</label>
+    <!-- Dropdown untuk memilih nama kurir -->
+    <select name="nama_kurir" id="nama_kurir" class="select select-bordered">
+        <option value="">semua</option> <!-- Opsi kosongkan -->
+        <?php foreach ($kurir as $nama): ?>
+            <option value="<?php echo htmlspecialchars($nama); ?>" 
+                <?php echo (isset($_GET['nama_kurir']) && $_GET['nama_kurir'] === $nama) ? 'selected' : ''; ?>>
+                <?php echo htmlspecialchars($nama); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
     </div>
+
 
     <!-- Tombol Submit -->
     <div class="form-control">
