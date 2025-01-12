@@ -5,7 +5,7 @@ class BarangController {
     private $model;
 
     public function __construct() {
-        $this->model = new ModelBarang();
+        $this->model = new ModelBarang(); //composite
     }
 
     public function list_barang() {
@@ -22,12 +22,6 @@ class BarangController {
         
     }
 
-    
-
-    
-    
-
-    
 
     public function addBarang() {
         // Pastikan metode ini tidak menerima argumen

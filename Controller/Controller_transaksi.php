@@ -34,6 +34,7 @@ public function checkout($id_user) {
     if ($id_transaksi) {
         foreach ($cart_items as $item) {
             $total_harga_item = $item['jumlah'] * $item['harga_barang'];
+             //aggregation
             $this->model->saveDetailTransaksi($id_transaksi, $item['id_barang'], $item['jumlah'], $total_harga_item);
         }
 
