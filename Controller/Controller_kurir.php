@@ -62,12 +62,16 @@ class KurirController {
             $id_transaksi = $_POST['id_transaksi'];
             $status = $_POST['status'];
             $bukti_pengiriman = '';
+            // echo "<pre>";
+            // print_r($_FILES);
+            // echo "</pre>";
     
             // Periksa apakah file diunggah
             if (isset($_FILES['bukti_pengiriman']) && $_FILES['bukti_pengiriman']['error'] === UPLOAD_ERR_OK) {
                 $targetDir = "bukti_pengiriman/";
                 $bukti_pengiriman = basename($_FILES["bukti_pengiriman"]["name"]);
                 $targetFile = $targetDir . $bukti_pengiriman;
+                // echo $targetFile;
     
                 // Validasi tipe file (hanya gambar yang diperbolehkan)
                 $fileType = mime_content_type($_FILES["bukti_pengiriman"]["tmp_name"]);

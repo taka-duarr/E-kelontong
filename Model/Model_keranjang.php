@@ -53,10 +53,6 @@ class ModelKeranjang {
         // Persiapkan statement MySQLi
         $stmt = $this->db->prepare($sql);
         
-        if (!$stmt) {
-            die("Error preparing statement: " . $this->db->error);
-        }
-        
         // Bind parameter untuk integer (id_user)
         $stmt->bind_param("i", $id_user);
         $stmt->execute();

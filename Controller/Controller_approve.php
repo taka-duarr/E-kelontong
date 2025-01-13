@@ -1,6 +1,6 @@
 <?php
 require_once 'Model/Model_approve.php';
-require_once '../vendor/autoload.php'; // Pastikan autoload Composer di-load
+require_once 'vendor/autoload.php'; // Pastikan autoload Composer di-load
 use Dompdf\Dompdf;
 
 class ApproveController {
@@ -38,8 +38,6 @@ class ApproveController {
             });
         }
         
-        
-    
         // Terapkan filter status
         if ($filterStatus !== null && $filterStatus !== '') {
             $transaksi = array_filter($transaksi, function ($item) use ($filterStatus) {
@@ -47,7 +45,6 @@ class ApproveController {
             });
         }
     
-        // Terapkan filter nama kurir
         // Terapkan filter nama kurir
         if ($filterNamaKurir) {
             $transaksi = array_filter($transaksi, function ($item) use ($filterNamaKurir) {

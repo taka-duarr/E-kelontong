@@ -14,7 +14,6 @@ class ModelTransaksi {
         $this->db = $database->connect();
     }
 
-    // Simpan transaksi uta
 
     public function saveTransaksi($id_user, $nama_user, $total_harga, $status, $alamat) {
         $query = "INSERT INTO db_transaksi (id_user,nama_user, total_harga, status, alamat, tanggal) VALUES (?, ?, ?, ?, ?, NOW())";
@@ -34,9 +33,6 @@ class ModelTransaksi {
             VALUES (?, ?, ?, ?)
         ";
         $stmtInsert = $this->db->prepare($queryInsert);
-        if (!$stmtInsert) {
-            die("Query Error: " . $this->db->error);
-        }
     
         $stmtInsert->bind_param("iiii", $id_transaksi, $id_barang, $jumlah, $total_harga_item);
         return $stmtInsert->execute();
@@ -55,9 +51,6 @@ class ModelTransaksi {
             WHERE c.id_user = ?
         ";
         $stmt = $this->db->prepare($query);
-        if (!$stmt) {
-            die("Query Error: " . $this->db->error); // Debug error kueri
-        }
         $stmt->bind_param("i", $id_user);
         $stmt->execute();
         $result = $stmt->get_result();

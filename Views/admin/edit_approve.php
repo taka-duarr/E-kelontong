@@ -49,7 +49,7 @@ echo '</pre>';
                     </div>
 
                     <div class="mb-4">
-                        <label for="nama_kurir" class="block text-gray-700 text-sm font-bold mb-2">Role</label>
+                        <label for="nama_kurir" class="block text-gray-700 text-sm font-bold mb-2">Kurir:</label>
                         <select id="nama_kurir" name="nama_kurir" 
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                         <option value="">Pilih kurir</option>

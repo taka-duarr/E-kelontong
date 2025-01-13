@@ -14,8 +14,9 @@ class BaseModel {
         $this->db = $database->connect();
     }
 
-    public function getAll() {
-        $query = "SELECT * FROM db_barang"; // Langsung menggunakan nama tabel
+    public function getAllBarang() {
+        // Implementasi default untuk mendapatkan semua data
+        $query = "SELECT * FROM db_barang";
         $result = $this->db->query($query);
 
         $data = [];
@@ -29,7 +30,7 @@ class BaseModel {
     }
 
     public function deleteById($id_column, $id) {
-        $query = "DELETE FROM db_barang WHERE $id_column = ?"; // Langsung menggunakan nama tabel
+        $query = "DELETE FROM db_barang WHERE $id_column = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id);
         return $stmt->execute();
@@ -38,13 +39,25 @@ class BaseModel {
 
 // Kelas Turunan: ModelBarang
 class ModelBarang extends BaseModel {
+    // Overriding metode getAllBarang dari BaseModel
     public function getAllBarang() {
-        return $this->getAll();
+        // Implementasi baru: hanya mendapatkan barang yang aktif (status_barang = 1)
+        $query = "SELECT * FROM db_barang WHERE status_barang = 1";
+        $result = $this->db->query($query);
+
+        $data = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+
+        return $data;
     }
 
     public function createBarang($nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang) {
         $query = "INSERT INTO db_barang (nama_barang, stok_barang, harga_barang, gambar_barang, status_barang) 
-                  VALUES (?, ?, ?, ?, ?)";
+                VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("sssss", $nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang);
         return $stmt->execute();
@@ -52,8 +65,8 @@ class ModelBarang extends BaseModel {
 
     public function updateBarang($id_barang, $nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang) {
         $query = "UPDATE db_barang 
-                  SET nama_barang = ?, stok_barang = ?, harga_barang = ?, gambar_barang = ?, status_barang = ? 
-                  WHERE id_barang = ?";
+                SET nama_barang = ?, stok_barang = ?, harga_barang = ?, gambar_barang = ?, status_barang = ? 
+                WHERE id_barang = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("sssssi", $nama_barang, $stok_barang, $harga_barang, $gambar_barang, $status_barang, $id_barang);
         return $stmt->execute();
