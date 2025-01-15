@@ -12,7 +12,7 @@ class ModelUser {
         $this->connectDatabase();
         $this->model_role = new ModelRole(); //asosiasi dengan model role
     }
-
+    
     public function connectDatabase() {
         $database = new Database(); // Membuat instance dari class Database
         $this->db = $database->connect(); // Mengambil koneksi dari class Database
