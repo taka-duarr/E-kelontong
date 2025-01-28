@@ -1,5 +1,6 @@
 <?php
 require_once 'Model/Model_user.php';
+require_once 'Model/Model_role.php';
 
 class LoginController
 {
@@ -7,13 +8,15 @@ class LoginController
 
     public function __construct()
     {
-        $this->modelUser = new ModelUser();
+        // Membuat objek ModelRole
+        $model_role = new ModelRole();
+
+        // Mengirim objek ModelRole ke konstruktor ModelUser
+        $this->modelUser = new ModelUser($model_role);
     }
 
     public function login()
     {
-   
-        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['nama_user'] ?? null;
             $password = $_POST['password_user'] ?? null;
@@ -53,42 +56,37 @@ class LoginController
 
     public function logout() {
         header("Location: index.php?modul=login&fitur=login");
-        
     }
 
     public function register(){
-    $error = null;
-    $success = null;
+        $error = null;
+        $success = null;
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $username = $_POST['nama_user'] ?? null;
-        $password = $_POST['password_user'] ?? null;
-        $role = 'customer'; // Role fixed sebagai 'customer'
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $username = $_POST['nama_user'] ?? null;
+            $password = $_POST['password_user'] ?? null;
+            $role = 'customer'; // Role fixed sebagai 'customer'
 
-        try {
-            // Validasi input
-            if (!$username || !$password) {
-                throw new Exception("Harap isi semua kolom.");
+            try {
+                // Validasi input
+                if (!$username || !$password) {
+                    throw new Exception("Harap isi semua kolom.");
+                }
+
+                // Validasi jika username sudah ada
+                $existingUser = $this->modelUser->getUserByName($username);
+                if ($existingUser) {
+                    throw new Exception("Username sudah digunakan, coba yang lain.");
+                }
+
+                // Tambahkan user ke database
+                $this->modelUser->createUser($username, $password, $role);
+                $success = "Pendaftaran berhasil! Silakan login.";
+            } catch (Exception $e) {
+                $error = $e->getMessage();
             }
-
-            // Validasi jika username sudah ada
-            $existingUser = $this->modelUser->getUserByName($username);
-            if ($existingUser) {
-                throw new Exception("Username sudah digunakan, coba yang lain.");
-            }
-
-            // Tambahkan user ke database
-            $this->modelUser->createUser($username, $password, $role);
-            $success = "Pendaftaran berhasil! Silakan login.";
-        } catch (Exception $e) {
-            $error = $e->getMessage();
         }
+
+        include 'Views/register.php'; // Tampilkan halaman register
     }
-
-    include 'Views/register.php'; // Tampilkan halaman register
-}
-
-    
-    
-    
 }

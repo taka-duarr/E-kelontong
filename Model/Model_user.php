@@ -8,9 +8,9 @@ class ModelUser {
     private $db;
     private $model_role;
 
-    public function __construct() {
+    public function __construct(ModelRole $model_role) {
         $this->connectDatabase();
-        $this->model_role = new ModelRole(); //asosiasi dengan model role
+        $this->model_role = $model_role;
     }
     
     public function connectDatabase() {

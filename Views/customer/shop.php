@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-Kelontong - Product List</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="assets/css/templatemo.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="min-h-screen flex flex-col">
     <?php include 'includes/navbar.php'; ?>
+
+
 
     <main class="flex-grow container mx-auto px-2 sm:px-4 py-4 sm:py-8">
     <div class="flex flex-col sm:flex-row justify-center items-center mb-4 sm:mb-6">
@@ -68,6 +71,8 @@
 
 
     <?php include 'includes/footer.php'; ?>
+
+    <script src="Views/customer/assets/js/bootstrap.bundle.min.js"></script>
 
     <script>
         document.getElementById('liveSearch').addEventListener('input', function () {
